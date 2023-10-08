@@ -45,12 +45,26 @@ def scrape_University_of_Pennsylvania():
     return data
 
 def scrape_New_York_University():
-    school = "New_York_University"
+    school = "New York University"
     url = url_New_York_University 
     data = []
     response = requests.get(url)
     soup=BeautifulSoup(response.text, "html.parser")
-    years = soup.find_all('h3')
+    for year_range in ['2021 - 2022', '2022 - 2023']:
+        year_section = soup.find('summary', string=year_range)
+        if year_section:
+            # Extract placements, which are separated by <br />
+            placements_section = year_section.find_next('p').find('p')  # Considering nested <p> tags
+            placements = [placement for placement in placements_section.stripped_strings]
+
+            for placement in placements:
+                data.append({
+                    'school': school,
+                    'year': year_range,
+                    'placement': placement
+                })
+    print(data)
+    return data
 
 def scrape_Northwestern_University():
     school = "Northwestern University"
@@ -58,7 +72,23 @@ def scrape_Northwestern_University():
     data = []
     response = requests.get(url)
     soup=BeautifulSoup(response.text, "html.parser")
-    years = soup.find_all('h3')
+    for year in ['2022', '2023']:
+        year_section = soup.find('h3', string=year)
+        if year_section:
+            # Find the associated academic placements section
+            academic_placements_section = year_section.find_next('div', class_='expander expander1')
+
+            if academic_placements_section:
+                # Extract placements
+                placements = academic_placements_section.find_all('li')
+                for placement in placements:
+                    data.append({
+                        'school': school,
+                        'year': year,
+                        'placement': placement.get_text(strip=True)
+                    })
+    print(data)
+    return data
 
 def scrape_University_of_California_Davis():
     school = "University of California, Davis"
@@ -66,7 +96,7 @@ def scrape_University_of_California_Davis():
     data = []
     response = requests.get(url)
     soup=BeautifulSoup(response.text, "html.parser")
-    years = soup.find_all('h3')
+ 
 
 def scrape_University_of_Texas_Austin():
     school = "University of Texas, Austin"
@@ -74,7 +104,7 @@ def scrape_University_of_Texas_Austin():
     data = []
     response = requests.get(url)
     soup=BeautifulSoup(response.text, "html.parser")
-    years = soup.find_all('h3')
+ 
 
 def scrape_Boston_University():
     school = "Boston_University"
@@ -82,7 +112,7 @@ def scrape_Boston_University():
     data = []
     response = requests.get(url)
     soup=BeautifulSoup(response.text, "html.parser")
-    years = soup.find_all('h3')
+ 
 
 def scrape_University_of_Maryland_College_Park():
     school = "University of Maryland, College Park"
@@ -90,7 +120,7 @@ def scrape_University_of_Maryland_College_Park():
     data = []
     response = requests.get(url)
     soup=BeautifulSoup(response.text, "html.parser")
-    years = soup.find_all('h3')
+
 
 def scrape_UCBerkeley():
     school = "University of California, Berkeley"
@@ -396,9 +426,10 @@ def scrape_Washington_University_in_St_Louis():
 # scraped_data_BC = scrape_BC()
 # scrape_data_Vir= scrape_University_of_Virginia()
 # scraped_data_PSU= scrape_PSU()
-scraped_data_New_York_University= scrape_New_York_University()
+# scraped_data_New_York_University= scrape_New_York_University()
 # scraped_data_Northwestern_University= scrape_Northwestern_University()
-scraped_data_University_of_Pennsylvania= scrape_University_of_Pennsylvania()
+# scraped_data_University_of_Pennsylvania= scrape_University_of_Pennsylvania()
+
 # scraped_data_University_of_California_Davis= scrape_University_of_California_Davis()
 # scraped_data_University_of_Texas_Austin= scrape_University_of_Texas_Austin()
 # scraped_data_University_of_Maryland_College_Park= scrape_University_of_Maryland_College_Park()
