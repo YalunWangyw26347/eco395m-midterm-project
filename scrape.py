@@ -2,6 +2,12 @@ import csv
 import requests
 from bs4 import BeautifulSoup
 
+url_Northwestern_University = "https://economics.northwestern.edu/graduate/prospective/placement.html"
+url_New_York_University = "https://as.nyu.edu/departments/econ/job-market/placements.html"
+url_Boston_University = "https://www.bu.edu/econ/academics/phd/recent-phd-placements/"
+url_University_of_Maryland_College_Park = "https://www.econ.umd.edu/graduate/job-placement"
+url_University_of_Texas_Austin = "https://liberalarts.utexas.edu/economics/ph-d-program/dissertations-placements.html"
+url_University_of_California_Davis = "https://economics.ucdavis.edu/graduate-student-placements"
 url_University_of_California_Berkeley = "https://www.econ.berkeley.edu/grad/program/placement-outcomes"
 url_Princeton_University = "https://economics.princeton.edu/graduate-program/job-market-and-placements/statistics-on-past-placements/"
 url_Harvard_University = "https://economics.harvard.edu/placement"
@@ -15,6 +21,63 @@ url_University_of_Rochester="https://www.sas.rochester.edu/eco/graduate/placemen
 url_University_of_Virginia="https://economics.virginia.edu/placement-history"
 url_Vanderbilt_University="https://as.vanderbilt.edu/economics/phd-placements/"
 url_Washington_University_in_St_Louis="https://economics.wustl.edu/job-market-and-placement"
+
+def scrape_University_of_Pennsylvania():
+    school = "University of Pennsylvania"
+    url = url_University_of_Pennsylvania 
+    data = []
+    response = requests.get(url)
+    soup=BeautifulSoup(response.text, "html.parser")
+    years = soup.find_all('h3')
+    
+
+def scrape_New_York_University():
+    school = "New_York_University"
+    url = url_New_York_University 
+    data = []
+    response = requests.get(url)
+    soup=BeautifulSoup(response.text, "html.parser")
+    years = soup.find_all('h3')
+
+def scrape_Northwestern_University():
+    school = "Northwestern University"
+    url = url_Northwestern_University 
+    data = []
+    response = requests.get(url)
+    soup=BeautifulSoup(response.text, "html.parser")
+    years = soup.find_all('h3')
+
+def scrape_University_of_California_Davis():
+    school = "University of California, Davis"
+    url = url_University_of_California_Davis 
+    data = []
+    response = requests.get(url)
+    soup=BeautifulSoup(response.text, "html.parser")
+    years = soup.find_all('h3')
+
+def scrape_University_of_Texas_Austin():
+    school = "University of Texas, Austin"
+    url = url_University_of_Texas_Austin
+    data = []
+    response = requests.get(url)
+    soup=BeautifulSoup(response.text, "html.parser")
+    years = soup.find_all('h3')
+
+def scrape_Boston_University():
+    school = "Boston_University"
+    url = url_Boston_University
+    data = []
+    response = requests.get(url)
+    soup=BeautifulSoup(response.text, "html.parser")
+    years = soup.find_all('h3')
+
+def scrape_University_of_Maryland_College_Park():
+    school = "University of Maryland, College Park"
+    url = url_University_of_Maryland_College_Park
+    data = []
+    response = requests.get(url)
+    soup=BeautifulSoup(response.text, "html.parser")
+    years = soup.find_all('h3')
 
 def scrape_UCBerkeley():
     school = "University of California, Berkeley"
@@ -320,3 +383,11 @@ def scrape_Washington_University_in_St_Louis():
 # scraped_data_BC = scrape_BC()
 # scrape_data_Vir= scrape_University_of_Virginia()
 # scraped_data_PSU= scrape_PSU()
+scraped_data_New_York_University= scrape_New_York_University()
+scraped_data_Northwestern_University= scrape_Northwestern_University()
+scraped_data_University_of_Pennsylvania= scrape_University_of_Pennsylvania()
+scraped_data_University_of_California_Davis= scrape_University_of_California_Davis()
+scraped_data_University_of_Texas_Austin= scrape_University_of_Texas_Austin()
+scraped_data_University_of_Maryland_College_Park= scrape_University_of_Maryland_College_Park()
+scraped_data_Boston_University= scrape_Boston_University()
+
