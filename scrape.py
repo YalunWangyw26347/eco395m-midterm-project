@@ -28,8 +28,21 @@ def scrape_University_of_Pennsylvania():
     data = []
     response = requests.get(url)
     soup=BeautifulSoup(response.text, "html.parser")
-    years = soup.find_all('h3')
-    
+    panels = soup.find_all('div', class_='panel-title')
+    for panel in panels:
+        year = panel.get_text(strip=True)  # Get the placement year
+        if '2022' in year or '2023' in year:
+            associated_data = panel.find_next('div', class_='card-block panel-collapse collapse')
+            if associated_data:
+                placements = associated_data.find_all('p')
+                for placement in placements:
+                    text_content = placement.get_text(strip=True)
+                    if '-' in text_content:
+                        name = text_content.split('-')[0].strip()
+                        place = text_content.split('-')[1].strip()
+                        data.append({'school': school, 'year': year, 'name': name, 'placement': place})
+    print(data)
+    return data
 
 def scrape_New_York_University():
     school = "New_York_University"
@@ -384,10 +397,10 @@ def scrape_Washington_University_in_St_Louis():
 # scrape_data_Vir= scrape_University_of_Virginia()
 # scraped_data_PSU= scrape_PSU()
 scraped_data_New_York_University= scrape_New_York_University()
-scraped_data_Northwestern_University= scrape_Northwestern_University()
+# scraped_data_Northwestern_University= scrape_Northwestern_University()
 scraped_data_University_of_Pennsylvania= scrape_University_of_Pennsylvania()
-scraped_data_University_of_California_Davis= scrape_University_of_California_Davis()
-scraped_data_University_of_Texas_Austin= scrape_University_of_Texas_Austin()
-scraped_data_University_of_Maryland_College_Park= scrape_University_of_Maryland_College_Park()
-scraped_data_Boston_University= scrape_Boston_University()
+# scraped_data_University_of_California_Davis= scrape_University_of_California_Davis()
+# scraped_data_University_of_Texas_Austin= scrape_University_of_Texas_Austin()
+# scraped_data_University_of_Maryland_College_Park= scrape_University_of_Maryland_College_Park()
+# scraped_data_Boston_University= scrape_Boston_University()
 
