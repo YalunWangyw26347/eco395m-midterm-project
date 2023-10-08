@@ -38,14 +38,21 @@ def scrape_BC():
 
 
 def scrape_PSU():
+    data_all=[]
     school="Pennsylvania State University"
     url=url_Pennsylvania_State_University
     response=requests.get(url)
     soup=BeautifulSoup(response.text, "html.parser")
-    div_class_tags=soup.find_all('div',class_="jet-toggle__label-icon jet-toggle-icon-position-left")
+    info_2023=soup.find('meta',property="og:description")
+    data_all.append(info_2023)
+    print(info_2023)
+    info_2022=soup.find("div",id="jet-toggle-content-2572")
+    p_tags=info_2022.find_all("p")
+    for p_tag in p_tags:
+        data_all.append(p_tag.get_text())
+    print(data_all)
 
-
-    return
+    return data_all
 
 def scrape_University_of_Rochester():
     data=[]
@@ -77,16 +84,16 @@ def scrape_University_of_Virginia():
     for table_class_tag in table_class_tags:
         time=table_class_tag.find("caption").get_text()
         samples=table_class_tag.find_all("tr")
-        if time==2023 or time ==2022:
+        if time=="2023" or time =="2022":
             for sample in samples:
                 if sample.find('th'):
                     continue
                 else:
                     data=[]
                     getname=sample.find("h4")
-                    StudentName=getname.get_text()
+                    StudentName=getname.get_text().strip()
                     getplacement=sample.find("td", class_="views-field views-field-field-initial-placement")
-                    Placement=getplacement.get_text()
+                    Placement=getplacement.get_text().strip()
                     data.append(time)
                     data.append(school)
                     data.append(StudentName)
@@ -136,7 +143,8 @@ def scrape_Washington_University_in_St_Louis():
     return data
 # scraped_data_BC = scrape_BC()
 # scraped_data_WL = scrape_Washington_University_in_St_Louis()
-# scraped_data_Van= scrape_Vanderbilt_University()
+#scraped_data_Van= scrape_Vanderbilt_University()
 # scrape_data_Rochester= scrape_University_of_Rochester()
 scrape_data_Vir= scrape_University_of_Virginia()
 
+#scraped_data_PSU= scrape_PSU()
