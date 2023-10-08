@@ -5,9 +5,6 @@ from bs4 import BeautifulSoup
 url_Northwestern_University = "https://economics.northwestern.edu/graduate/prospective/placement.html"
 url_New_York_University = "https://as.nyu.edu/departments/econ/job-market/placements.html"
 url_Boston_University = "https://www.bu.edu/econ/academics/phd/recent-phd-placements/"
-url_University_of_Maryland_College_Park = "https://www.econ.umd.edu/graduate/job-placement"
-url_University_of_Texas_Austin = "https://liberalarts.utexas.edu/economics/ph-d-program/dissertations-placements.html"
-url_University_of_California_Davis = "https://economics.ucdavis.edu/graduate-student-placements"
 url_University_of_California_Berkeley = "https://www.econ.berkeley.edu/grad/program/placement-outcomes"
 url_Princeton_University = "https://economics.princeton.edu/graduate-program/job-market-and-placements/statistics-on-past-placements/"
 url_Harvard_University = "https://economics.harvard.edu/placement"
@@ -90,38 +87,34 @@ def scrape_Northwestern_University():
     print(data)
     return data
 
-def scrape_University_of_California_Davis():
-    school = "University of California, Davis"
-    url = url_University_of_California_Davis 
-    data = []
-    response = requests.get(url)
-    soup=BeautifulSoup(response.text, "html.parser")
- 
-
-def scrape_University_of_Texas_Austin():
-    school = "University of Texas, Austin"
-    url = url_University_of_Texas_Austin
-    data = []
-    response = requests.get(url)
-    soup=BeautifulSoup(response.text, "html.parser")
- 
-
 def scrape_Boston_University():
-    school = "Boston_University"
+    school = "Boston University"
     url = url_Boston_University
     data = []
     response = requests.get(url)
     soup=BeautifulSoup(response.text, "html.parser")
+    for year in ['2022', '2023']:
+        year_section = soup.find('h3', string=year)
+        if year_section:
+            # Locate the table containing the placements
+            table = year_section.find_next('table')
+            rows = table.find_all('tr')
+            
+            for row in rows:
+                columns = row.find_all('td')
+                if len(columns) == 2:  # Ensure it's a row with placement and name
+                    placement = columns[0].get_text(strip=True)
+                    name = columns[1].get_text(strip=True)
+                    data.append({
+                        'school': school,
+                        'year': year,
+                        'name': name,
+                        'placement': placement
+                        
+                    })
+    print(data)
+    return data
  
-
-def scrape_University_of_Maryland_College_Park():
-    school = "University of Maryland, College Park"
-    url = url_University_of_Maryland_College_Park
-    data = []
-    response = requests.get(url)
-    soup=BeautifulSoup(response.text, "html.parser")
-
-
 def scrape_UCBerkeley():
     school = "University of California, Berkeley"
     url = url_University_of_California_Berkeley 
@@ -222,7 +215,6 @@ def scrape_Yale():
     # print(data)
     return data
 
-
 def scrape_Stanford():
     school = "Stanford University"
     url = url_Stanford_University
@@ -307,8 +299,6 @@ def scrape_BC():
             data_all.append(data)
     #print(data_all)
     return data_all
-
-
 
 def scrape_PSU():
     data_all=[]
@@ -429,9 +419,9 @@ def scrape_Washington_University_in_St_Louis():
 # scraped_data_New_York_University= scrape_New_York_University()
 # scraped_data_Northwestern_University= scrape_Northwestern_University()
 # scraped_data_University_of_Pennsylvania= scrape_University_of_Pennsylvania()
-
-# scraped_data_University_of_California_Davis= scrape_University_of_California_Davis()
-# scraped_data_University_of_Texas_Austin= scrape_University_of_Texas_Austin()
-# scraped_data_University_of_Maryland_College_Park= scrape_University_of_Maryland_College_Park()
 # scraped_data_Boston_University= scrape_Boston_University()
+
+
+
+
 
