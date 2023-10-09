@@ -13,7 +13,6 @@ url_Yale_University = "https://economics.yale.edu/phd-program/placement/outcomes
 url_Columbia_University = "https://econ.columbia.edu/phd/placement/"
 url_University_of_Pennsylvania = "https://economics.sas.upenn.edu/graduate/prospective-students/placement-information"
 url_Boston_College="https://www.bc.edu/bc-web/schools/mcas/departments/economics/graduate/placements.html"
-url_Pennsylvania_State_University="https://econ.la.psu.edu/ph-d-program/initial-placements-of-ph-d-graduates/"
 url_University_of_Rochester="https://www.sas.rochester.edu/eco/graduate/placement.html"
 url_University_of_Virginia="https://economics.virginia.edu/placement-history"
 url_Vanderbilt_University="https://as.vanderbilt.edu/economics/phd-placements/"
@@ -295,26 +294,6 @@ def scrape_BC():
     print(data_all)
     return data_all
 
-def scrape_PSU():
-    data=[]
-    data_2023=[]#In this url information from 2023 has different structure 
-    data_2022=[]
-    school="Pennsylvania State University"
-    url=url_Pennsylvania_State_University
-    response=requests.get(url)
-    soup=BeautifulSoup(response.text, "html.parser")
-    info_2023=soup.find('meta',property="og:description").get("content","")
-    # info_2023_text=info_2023.
-    print(info_2023)
-    #data_2023.append(info_2023_list)
-    print(data_2023)
-    info_2022=soup.find("div",id="jet-toggle-content-2572")
-    p_tags=info_2022.find_all("p")
-    for p_tag in p_tags:
-        data_2022.append(p_tag.get_text())
-    data=data_2023+data_2022
-    return data
-
 def scrape_University_of_Rochester():
     data=[]
     school="University of Rochester"
@@ -419,7 +398,7 @@ scrape_data_UCBerkeley= scrape_UCBerkeley()
 #scrape_data_Rochester= scrape_University_of_Rochester()
 #scraped_data_BC = scrape_BC()
 #scrape_data_Vir= scrape_University_of_Virginia()
-#scraped_data_PSU= scrape_PSU()
+
 
 
 
