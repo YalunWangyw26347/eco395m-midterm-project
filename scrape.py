@@ -37,7 +37,7 @@ def scrape_University_of_Pennsylvania():
                     if '-' in text_content:
                         name = text_content.split('-')[0].strip()
                         place = text_content.split('-')[1].strip()
-                        data.append({'school': school, 'year': year, 'name': name, 'placement': place})
+                        data.append({'School': school, 'Year': year, 'Name': name, 'Placement': place})
     print(data)
     return data
 
@@ -56,11 +56,11 @@ def scrape_New_York_University():
 
             for placement in placements:
                 data.append({
-                    'school': school,
-                    'year': year_range,
-                    'placement': placement
+                    'School': school,
+                    'Year': year_range,
+                    'Placement': placement
                 })
-    print(data)
+    #print(data)
     return data
 
 def scrape_Northwestern_University():
@@ -80,9 +80,9 @@ def scrape_Northwestern_University():
                 placements = academic_placements_section.find_all('li')
                 for placement in placements:
                     data.append({
-                        'school': school,
-                        'year': year,
-                        'placement': placement.get_text(strip=True)
+                        'School': school,
+                        'Year': year,
+                        'Placement': placement.get_text(strip=True)
                     })
     print(data)
     return data
@@ -106,13 +106,13 @@ def scrape_Boston_University():
                     placement = columns[0].get_text(strip=True)
                     name = columns[1].get_text(strip=True)
                     data.append({
-                        'school': school,
-                        'year': year,
-                        'name': name,
-                        'placement': placement
+                        'School': school,
+                        'Year': year,
+                        'Name': name,
+                        'Placement': placement
                         
                     })
-    print(data)
+    #print(data)
     return data
  
 def scrape_UCBerkeley():
@@ -132,8 +132,10 @@ def scrape_UCBerkeley():
                 student_list = placement_type_tag.find_next("ul")
                 if student_list:
                     placements = [li.get_text(strip=True) for li in student_list.find_all("li")]
-                    data.append({"School Name": school, "Year": year_text,  "Placements": placements})
-    # print(data)
+                    for i in placements:
+                        placement=i.split(";")[1]
+                        data.append({"School Name": school, "Year": year_text,"Placement":placement})
+    print(data)
     return data
 
 def scrape_Princeton():
@@ -154,7 +156,7 @@ def scrape_Princeton():
                 "Year": year,
                 "Placement": institution  +  position
             })
-    print(data)
+    #print(data)
     return data
 
 def scrape_Columbia():
@@ -183,7 +185,7 @@ def scrape_Columbia():
                             "Name": name,
                             "Placement": placement
                         })
-    print(data)
+    #print(data)
     return data
 
 def scrape_Yale():
@@ -208,11 +210,11 @@ def scrape_Yale():
                         data.append({
                             "School": school,
                             "Year": year_text.split(":")[1].strip(),  # Extracting the year only
-                            "Student Name": name_tag.text.strip(),
+                            "Name": name_tag.text.strip(),
                             "Placement": placement_tag.text.strip()
                         })
                 
-    # print(data)
+    #print(data)
     return data
 
 def scrape_Stanford():
@@ -242,7 +244,7 @@ def scrape_Stanford():
                             "Placement": placement
                         })
 
-    # print(data)
+    #print(data)
     return data
 
 def scrape_Harvard():
@@ -272,50 +274,46 @@ def scrape_Harvard():
                             "Placement": placement
                         })
 
-    # print(data)
+    #print(data)
     return data
 
 def scrape_BC():
     school="Boston College"
-    response_dict={}
     data_all=[]
     url=url_Boston_College
     response=requests.get(url)
     soup=BeautifulSoup(response.text, "html.parser")
-    table_class_tags=soup.find("table")
-    samples=table_class_tags.find_all("tr")
-    # print(samples)
-    for sample in samples[1:]:
-        data=[]
+    table_class_tags=soup.find("table")# information in this url are shown in one single table
+    samples=table_class_tags.find_all("tr")# information we want are in <tr>
+    for sample in samples[1:]:# skip the header
         information= sample.find_all("td")
         StudentName=information[0].text.strip()
         Year=information[1].text.strip()
         placement=information[2].text.strip()
-        if (Year== 2023) or (Year== 2022):
-            data.append(Year)
-            data.append(school)
-            data.append(StudentName)
-            data.append(placement)
-            data_all.append(data)
-    #print(data_all)
+        if (Year== "2023") or (Year== "2022"):
+            data_all.append({"School":school,"Year":Year, "Name":StudentName, "Placemet":placement})
+    print(data_all)
     return data_all
 
 def scrape_PSU():
-    data_all=[]
+    data=[]
+    data_2023=[]#In this url information from 2023 has different structure 
+    data_2022=[]
     school="Pennsylvania State University"
     url=url_Pennsylvania_State_University
     response=requests.get(url)
     soup=BeautifulSoup(response.text, "html.parser")
-    info_2023=soup.find('meta',property="og:description")
-    data_all.append(info_2023)
+    info_2023=soup.find('meta',property="og:description").get("content","")
+    # info_2023_text=info_2023.
     print(info_2023)
+    #data_2023.append(info_2023_list)
+    print(data_2023)
     info_2022=soup.find("div",id="jet-toggle-content-2572")
     p_tags=info_2022.find_all("p")
     for p_tag in p_tags:
-        data_all.append(p_tag.get_text())
-    print(data_all)
-
-    return data_all
+        data_2022.append(p_tag.get_text())
+    data=data_2023+data_2022
+    return data
 
 def scrape_University_of_Rochester():
     data=[]
@@ -331,14 +329,15 @@ def scrape_University_of_Rochester():
             ul = strong.find_next("ul") #we only focus on <ul> after <strong>
             if ul:
                 items = [li.get_text(strip=True) for li in ul.find_all("li")]
-                data.append({"School Name": school, "Year": time, "Students' Info": items})
-    
-
-    # print(data)
+                for i in items:
+                    name=i.split("-")[0]
+                    placement=i.split("-")[1]
+                    data.append({"School Name": school, "Year": time, "Name": name, "Placement":placement})
+    print(data)
     return data
 
 def scrape_University_of_Virginia():
-    data_all=[]
+    data=[]
     school="University of Virginia"
     url=url_University_of_Virginia
     response=requests.get(url)
@@ -352,18 +351,13 @@ def scrape_University_of_Virginia():
                 if sample.find('th'):
                     continue
                 else:
-                    data=[]
                     getname=sample.find("h4")
                     StudentName=getname.get_text().strip()
                     getplacement=sample.find("td", class_="views-field views-field-field-initial-placement")
                     Placement=getplacement.get_text().strip()
-                    data.append(time)
-                    data.append(school)
-                    data.append(StudentName)
-                    data.append(Placement)
-                    data_all.append(data)
-    print(data_all)
-    return data_all
+                    data.append({"School":school,"Year":time, "Name":StudentName,"Placement":Placement})
+    print(data)
+    return data
 
 def scrape_Vanderbilt_University():
     school="Vanderbilt_University"
@@ -377,14 +371,16 @@ def scrape_Vanderbilt_University():
         time = h4_tag.get_text()
         p_tags=div_year.find_all('p')
         for p_tag in p_tags:
-            data=[]
             content = p_tag.get_text()
-            data.append(time)
-            data.append(school)
-            data.append(content)
-            data_all.append(data)
-        #print(data)
-    #print(data_all)
+            info_list = content.split('\r\n')#split the whole content to get seperate information 
+            data_all.append({
+                            "School": school,
+                            "Year": time,
+                            "Name": info_list[0],
+                            "Placement": str(info_list[1:])# mix information regarding with job title and university they work for
+                        })
+       
+    print(data_all)
     return data_all
 
 def scrape_Washington_University_in_St_Louis():
@@ -400,26 +396,31 @@ def scrape_Washington_University_in_St_Louis():
             ul = strong.find_next("ul") #we only focus on <ul> after <strong>
             if ul:
                 items = [li.get_text(strip=True) for li in ul.find_all("li")]
-                data.append({"School Name": school, "Year": time, "Students' Info": items})
-    
+                for i in items:
+                    name=i.split(",")[0]
+                    placement=i.split(",")[1]
+                    data.append({"School Name": school, "Year": time, "Name": name, "Placement":placement})
+    print(data)
     return data
 
-# scraped_data_WL = scrape_Washington_University_in_St_Louis()
-# scraped_data_Van= scrape_Vanderbilt_University()
-# scrape_data_Rochester= scrape_University_of_Rochester()
-# scrape_data_UCBerkeley= scrape_UCBerkeley()
-# scrape_data_Yale= scrape_Yale()
-# scrape_data_Harvard = scrape_Harvard()
-# scrape_data_Stanford = scrape_Stanford()
-# scrape_data_Columbia = scrape_Columbia()
-# scrape_data_Princeton = scrape_Princeton()
-# scraped_data_BC = scrape_BC()
-# scrape_data_Vir= scrape_University_of_Virginia()
-# scraped_data_PSU= scrape_PSU()
-# scraped_data_New_York_University= scrape_New_York_University()
-# scraped_data_Northwestern_University= scrape_Northwestern_University()
-# scraped_data_University_of_Pennsylvania= scrape_University_of_Pennsylvania()
-# scraped_data_Boston_University= scrape_Boston_University()
+
+scrape_data_UCBerkeley= scrape_UCBerkeley()
+#scrape_data_Yale= scrape_Yale()
+#scrape_data_Harvard = scrape_Harvard()
+#scrape_data_Stanford = scrape_Stanford()
+#scrape_data_Columbia = scrape_Columbia()
+#scrape_data_Princeton = scrape_Princeton()
+#scraped_data_New_York_University= scrape_New_York_University()
+#scraped_data_Northwestern_University= scrape_Northwestern_University()
+#scraped_data_University_of_Pennsylvania= scrape_University_of_Pennsylvania()
+#scraped_data_Boston_University= scrape_Boston_University()
+#scraped_data_WL = scrape_Washington_University_in_St_Louis()
+#scraped_data_Van= scrape_Vanderbilt_University()
+#scrape_data_Rochester= scrape_University_of_Rochester()
+#scraped_data_BC = scrape_BC()
+#scrape_data_Vir= scrape_University_of_Virginia()
+#scraped_data_PSU= scrape_PSU()
+
 
 
 
