@@ -407,6 +407,14 @@ def scrape_Washington_University_in_St_Louis():
 #scrape_data_Rochester= scrape_University_of_Rochester()
 #scraped_data_BC = scrape_BC()
 #scrape_data_Vir= scrape_University_of_Virginia()
+ # scraped_data_UCLA = scrape_UCLA_graduate_placement()
+ # scraped_data_Cornell = scrape_Cornell()
+ # scraped_data_Duke = scrape_Duke()
+ # scraped_data_Minesota = scrape_Minnesota_Twin_cities()
+ #scraped_data_UT_Austin = scrape_UT_Austin()
+ #scraped_data_UC_Davis= scrape_UC_Davis()
+ #scraped_data_Brown = scrape_Brown_University()
+ #scraped_data_UCSD = scrape_UCSD()
 
 
 
