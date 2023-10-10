@@ -391,6 +391,218 @@ def scrape_Washington_University_in_St_Louis():
     print(data)
     return data
 
+def scrape_UCLA_graduate_placement():
+    school = "The University of California, Los Angeles"
+    data = []
+
+    response = requests.get(url_UCLA)
+    soup = BeautifulSoup(response.text, "html.parser")
+
+    # Find the year elements with 2023 and 2022
+    year_elements = soup.find_all('h4', class_='av-special-heading-tag', itemprop='headline')
+    relevant_years = ['2023', '2022']
+
+    for year_element in year_elements:
+        year = year_element.get_text(strip=True)
+
+        # Check if the year is one of the relevant years
+        if year in relevant_years:
+            # Find the parent table of the year_element
+            table = year_element.find_next('table')
+
+            # Iterate through the table rows
+            for row in table.find_all('tr'):
+                columns = row.find_all('td')
+                if len(columns) == 2:
+                    name = columns[0].get_text(strip=True)
+                    placement = columns[1].get_text(strip=True)
+                    data.append({'School': school, 'Year': year, 'Name': name, 'Placement': placement})
+
+    #print(data)
+    return data
+
+def scrape_Cornell():
+    school = "Cornell University"
+    data = []
+
+    response = requests.get(url_Cornell)
+    soup = BeautifulSoup(response.text, "html.parser")
+
+    # Find the table containing placement information
+    table = soup.find('table')
+
+    # Iterate through the table rows in the tbody
+    for row in table.find('tbody').find_all('tr'):
+        columns = row.find_all('td')
+
+        # Check if there are enough columns and if the year is 2022 or 2023
+        if len(columns) >= 5 and (columns[0].text.strip() in ['2022', '2023']):
+            year = columns[0].text.strip()
+            name = columns[1].text.strip()
+            placement = columns[2].text.strip()
+
+            data.append({'School': school, 'Year': year, 'Name': name, 'Placement': placement})
+
+    #print(data)
+    return data
+
+def scrape_Duke():
+    school = "Duke University"
+    data = []
+
+    response = requests.get(url_Duke)
+    soup = BeautifulSoup(response.text, "html.parser")
+
+    # Find all the panel-title elements
+    panel_titles = soup.find_all('div', class_='panel-title')
+
+    for panel_title in panel_titles:
+        # Extract the year from the anchor tag inside the panel-title
+        year_element = panel_title.find('a', class_='normal')
+        if year_element:
+            year = year_element.get_text(strip=True)
+
+            # Check if the year is in the specified list
+            if year in ['2022', '2023']:
+                # Find the corresponding placement information
+                placement = panel_title.find_next('div', class_='card-block')
+                if placement:
+                    # Extract the placement information from the table
+                    table = placement.find('table', class_='tablesaw')
+                    if table:
+                        rows = table.find_all('tr')
+                        for row in rows:
+                            columns = row.find_all('td')
+                            if len(columns) == 3:
+                                name = columns[0].text.strip()
+                                position = columns[1].text.strip()
+                                institution = columns[2].text.strip()
+                                if "Name" not in name:  # Check if it's not a header row
+                                    placement_text = f"{position} + {institution}"
+                                    data.append({'School': school, 'Year': year, 'Name': name, 'Placement': placement_text})
+
+    #print(data)
+    return data
+
+def scrape_Minnesota_Twin_cities():
+    school = "University of Minnesota"
+    data = []
+
+    response = requests.get(url_Minnesota)
+    soup = BeautifulSoup(response.text, "html.parser")
+
+    # Find the first table containing placement information
+    table = soup.find('table')
+
+    if table:
+        rows = table.find_all('tr')
+        for row in rows[1:]:  # Skip the header row
+            columns = row.find_all('td')
+            if len(columns) == 3:
+                name = columns[0].text.strip()
+                institution = columns[1].text.strip()
+                position = columns[2].text.strip()
+                placement_text = f"{position} + {institution}"
+                data.append({'School': school, 'Year': '2023', 'Name': name, 'Placement': placement_text})
+
+    # Find the next table (if there is one)
+    next_table = table.find_next('table')
+
+    if next_table:
+        rows = next_table.find_all('tr')
+        for row in rows[1:]:  # Skip the header row
+            columns = row.find_all('td')
+            if len(columns) == 3:
+                name = columns[0].text.strip()
+                institution = columns[1].text.strip()
+                position = columns[2].text.strip()
+                placement_text = f"{position} + {institution}"
+                data.append({'School': school, 'Year': '2022', 'Name': name, 'Placement': placement_text})
+
+    #print(data)
+    return data
+
+def scrape_UC_Davis():
+    school = "UC Davis"
+    data = []
+
+    response = requests.get(url_UC_Davis)
+    soup = BeautifulSoup(response.text, "html.parser")
+
+    # Find the table containing placement information
+    table = soup.find('table', class_='table--striped')
+
+    if table:
+        rows = table.find_all('tr')
+        for row in rows[1:]:  # Skip the header row
+            columns = row.find_all('td')
+            if len(columns) == 5:
+                try:
+                    last_name = columns[0].text.strip()
+                    first_name = columns[1].text.strip()
+                    phd_date = columns[2].text.strip()
+                    year = "20" + phd_date.split('-')[1]  # Extract year from PhD date
+                    if year in ["2022", "2021"]:
+                        placement = columns[3].text.strip() + " " + columns[4].text.strip()  # Combine First Placement and First Job Title
+                        name = f"{first_name} {last_name}"
+                        data.append({'School': school, 'Year': year, 'Name': name, 'Placement': placement})
+                except IndexError:
+                    pass  # Ignore rows with unexpected data
+    #print(data)
+    return data
+
+def scrape_Brown_University():
+    school = 'Brown University'
+    data = []
+
+    response = requests.get(url_Brown)
+    soup = BeautifulSoup(response.text, 'html.parser')
+
+    years = soup.find_all('div', class_='accordion_item')
+
+    for year in years:
+        year_text = year.find('button', class_='accordion_trigger').text.strip()
+
+        if year_text in ['2023', '2022', '2021']:
+            placements = year.find_all('li')
+
+            for placement in placements:
+                placement_text = placement.text.strip()
+                name = placement_text.split('-')[0].strip()
+                placement_info = '-'.join(placement_text.split('-')[1:]).strip()
+
+                data.append({
+                    'School': school,
+                    'Year': year_text,
+                    'Name': name,
+                    'Placement': placement_info
+                })
+    #print(data)
+    return data
+
+def scrape_UCSD():
+    data = []
+
+    response = requests.get(url_UCSD)
+    soup = BeautifulSoup(response.text, "html.parser")
+
+    # Find all the sections with placement history data
+    sections = soup.find_all('div', class_='drawer dark-theme')
+
+    for section in sections:
+        year = section.find('a').text.strip()
+        if year in ['2022-23', '2021-22']:
+            table = section.find('table', class_='styled')
+            rows = table.find_all('tr')[1:]  # Skip the header row
+
+            for row in rows:
+                columns = row.find_all('td')
+                if len(columns) == 4:
+                    name = columns[1].text.strip()
+                    placement = columns[3].text.strip()
+                    data.append({'School': 'UCSD', 'Year': year, 'Name': name, 'Placement': placement})
+    print(data)
+    return data
 
 #scrape_data_UCBerkeley= scrape_UCBerkeley()
 #scrape_data_Yale= scrape_Yale()
