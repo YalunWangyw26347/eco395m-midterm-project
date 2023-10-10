@@ -142,7 +142,7 @@ def scrape_UCBerkeley():
                 if student_list:
                     placements = [li.get_text(strip=True) for li in student_list.find_all("li")]
                     for i in placements:
-                        placement=i.split(";")[1]
+                        placement=i.split(";")[0]+ i.split(";")[1]
                         data.append({"School": school, "Year": year_text,"Name":"","Placement":placement})
     # print(data)
     return data
@@ -651,10 +651,6 @@ def write_data_to_csv(data, path):
         for row in data:
             writer.writerow(row)
 
-    # with open(path, "w+", newline="") as out_file:
-    #         write = csv.writer(out_file)
-    #         write.writerow(headers)
-    #         write.writerows(data)
 
 if __name__ == "__main__":
     data = raw_output()
