@@ -13,14 +13,18 @@ url_Yale_University = "https://economics.yale.edu/phd-program/placement/outcomes
 url_Columbia_University = "https://econ.columbia.edu/phd/placement/"
 url_University_of_Pennsylvania = "https://economics.sas.upenn.edu/graduate/prospective-students/placement-information"
 url_Boston_College="https://www.bc.edu/bc-web/schools/mcas/departments/economics/graduate/placements.html"
-url_Pennsylvania_State_University="https://econ.la.psu.edu/ph-d-program/initial-placements-of-ph-d-graduates/"
 url_University_of_Rochester="https://www.sas.rochester.edu/eco/graduate/placement.html"
 url_University_of_Virginia="https://economics.virginia.edu/placement-history"
 url_Vanderbilt_University="https://as.vanderbilt.edu/economics/phd-placements/"
 url_Washington_University_in_St_Louis="https://economics.wustl.edu/job-market-and-placement"
 
-
 url_UCLA="https://economics.ucla.edu/graduate/graduate-profiles/graduate-placement-history/"
+url_Cornell = "https://economics.cornell.edu/historical-placement-phd-students"
+url_Duke = "https://econ.duke.edu/phd-program/prospective-students/placements"
+url_UC_Davis = "https://economics.ucdavis.edu/graduate-student-placements"
+url_Minnesota = "https://cla.umn.edu/economics/graduate/job-placement-achievements"
+url_Brown = 'https://economics.brown.edu/academics/graduate/job-placement-results'
+url_UCSD = "https://economics.ucsd.edu/graduate-program/jobmarket-tab/placement-history.html"
 
 def scrape_University_of_Pennsylvania():
     school = "University of Pennsylvania"
@@ -40,7 +44,7 @@ def scrape_University_of_Pennsylvania():
                     if '-' in text_content:
                         name = text_content.split('-')[0].strip()
                         place = text_content.split('-')[1].strip()
-                        data.append({'school': school, 'year': year, 'name': name, 'placement': place})
+                        data.append({'School': school, 'Year': year, 'Name': name, 'Placement': place})
     print(data)
     return data
 
@@ -59,11 +63,11 @@ def scrape_New_York_University():
 
             for placement in placements:
                 data.append({
-                    'school': school,
-                    'year': year_range,
-                    'placement': placement
+                    'School': school,
+                    'Year': year_range,
+                    'Placement': placement
                 })
-    print(data)
+    #print(data)
     return data
 
 def scrape_Northwestern_University():
@@ -83,9 +87,9 @@ def scrape_Northwestern_University():
                 placements = academic_placements_section.find_all('li')
                 for placement in placements:
                     data.append({
-                        'school': school,
-                        'year': year,
-                        'placement': placement.get_text(strip=True)
+                        'School': school,
+                        'Year': year,
+                        'Placement': placement.get_text(strip=True)
                     })
     print(data)
     return data
@@ -109,13 +113,13 @@ def scrape_Boston_University():
                     placement = columns[0].get_text(strip=True)
                     name = columns[1].get_text(strip=True)
                     data.append({
-                        'school': school,
-                        'year': year,
-                        'name': name,
-                        'placement': placement
+                        'School': school,
+                        'Year': year,
+                        'Name': name,
+                        'Placement': placement
                         
                     })
-    print(data)
+    #print(data)
     return data
  
 def scrape_UCBerkeley():
@@ -135,8 +139,10 @@ def scrape_UCBerkeley():
                 student_list = placement_type_tag.find_next("ul")
                 if student_list:
                     placements = [li.get_text(strip=True) for li in student_list.find_all("li")]
-                    data.append({"School Name": school, "Year": year_text,  "Placements": placements})
-    # print(data)
+                    for i in placements:
+                        placement=i.split(";")[1]
+                        data.append({"School Name": school, "Year": year_text,"Placement":placement})
+    print(data)
     return data
 
 def scrape_Princeton():
@@ -157,7 +163,7 @@ def scrape_Princeton():
                 "Year": year,
                 "Placement": institution  +  position
             })
-    print(data)
+    #print(data)
     return data
 
 def scrape_Columbia():
@@ -186,7 +192,7 @@ def scrape_Columbia():
                             "Name": name,
                             "Placement": placement
                         })
-    print(data)
+    #print(data)
     return data
 
 def scrape_Yale():
@@ -211,11 +217,11 @@ def scrape_Yale():
                         data.append({
                             "School": school,
                             "Year": year_text.split(":")[1].strip(),  # Extracting the year only
-                            "Student Name": name_tag.text.strip(),
+                            "Name": name_tag.text.strip(),
                             "Placement": placement_tag.text.strip()
                         })
                 
-    # print(data)
+    #print(data)
     return data
 
 def scrape_Stanford():
@@ -245,7 +251,7 @@ def scrape_Stanford():
                             "Placement": placement
                         })
 
-    # print(data)
+    #print(data)
     return data
 
 def scrape_Harvard():
@@ -275,49 +281,25 @@ def scrape_Harvard():
                             "Placement": placement
                         })
 
-    # print(data)
+    #print(data)
     return data
 
 def scrape_BC():
     school="Boston College"
-    response_dict={}
     data_all=[]
     url=url_Boston_College
     response=requests.get(url)
     soup=BeautifulSoup(response.text, "html.parser")
-    table_class_tags=soup.find("table")
-    samples=table_class_tags.find_all("tr")
-    # print(samples)
-    for sample in samples[1:]:
-        data=[]
+    table_class_tags=soup.find("table")# information in this url are shown in one single table
+    samples=table_class_tags.find_all("tr")# information we want are in <tr>
+    for sample in samples[1:]:# skip the header
         information= sample.find_all("td")
         StudentName=information[0].text.strip()
         Year=information[1].text.strip()
         placement=information[2].text.strip()
-        if (Year== 2023) or (Year== 2022):
-            data.append(Year)
-            data.append(school)
-            data.append(StudentName)
-            data.append(placement)
-            data_all.append(data)
-    #print(data_all)
-    return data_all
-
-def scrape_PSU():
-    data_all=[]
-    school="Pennsylvania State University"
-    url=url_Pennsylvania_State_University
-    response=requests.get(url)
-    soup=BeautifulSoup(response.text, "html.parser")
-    info_2023=soup.find('meta',property="og:description")
-    data_all.append(info_2023)
-    print(info_2023)
-    info_2022=soup.find("div",id="jet-toggle-content-2572")
-    p_tags=info_2022.find_all("p")
-    for p_tag in p_tags:
-        data_all.append(p_tag.get_text())
+        if (Year== "2023") or (Year== "2022"):
+            data_all.append({"School":school,"Year":Year, "Name":StudentName, "Placemet":placement})
     print(data_all)
-
     return data_all
 
 def scrape_University_of_Rochester():
@@ -334,14 +316,15 @@ def scrape_University_of_Rochester():
             ul = strong.find_next("ul") #we only focus on <ul> after <strong>
             if ul:
                 items = [li.get_text(strip=True) for li in ul.find_all("li")]
-                data.append({"School Name": school, "Year": time, "Students' Info": items})
-    
-
-    # print(data)
+                for i in items:
+                    name=i.split("-")[0]
+                    placement=i.split("-")[1]
+                    data.append({"School Name": school, "Year": time, "Name": name, "Placement":placement})
+    print(data)
     return data
 
 def scrape_University_of_Virginia():
-    data_all=[]
+    data=[]
     school="University of Virginia"
     url=url_University_of_Virginia
     response=requests.get(url)
@@ -355,18 +338,13 @@ def scrape_University_of_Virginia():
                 if sample.find('th'):
                     continue
                 else:
-                    data=[]
                     getname=sample.find("h4")
                     StudentName=getname.get_text().strip()
                     getplacement=sample.find("td", class_="views-field views-field-field-initial-placement")
                     Placement=getplacement.get_text().strip()
-                    data.append(time)
-                    data.append(school)
-                    data.append(StudentName)
-                    data.append(Placement)
-                    data_all.append(data)
-    print(data_all)
-    return data_all
+                    data.append({"School":school,"Year":time, "Name":StudentName,"Placement":Placement})
+    print(data)
+    return data
 
 def scrape_Vanderbilt_University():
     school="Vanderbilt_University"
@@ -380,14 +358,16 @@ def scrape_Vanderbilt_University():
         time = h4_tag.get_text()
         p_tags=div_year.find_all('p')
         for p_tag in p_tags:
-            data=[]
             content = p_tag.get_text()
-            data.append(time)
-            data.append(school)
-            data.append(content)
-            data_all.append(data)
-        #print(data)
-    #print(data_all)
+            info_list = content.split('\r\n')#split the whole content to get seperate information 
+            data_all.append({
+                            "School": school,
+                            "Year": time,
+                            "Name": info_list[0],
+                            "Placement": str(info_list[1:])# mix information regarding with job title and university they work for
+                        })
+       
+    print(data_all)
     return data_all
 
 def scrape_Washington_University_in_St_Louis():
@@ -403,8 +383,11 @@ def scrape_Washington_University_in_St_Louis():
             ul = strong.find_next("ul") #we only focus on <ul> after <strong>
             if ul:
                 items = [li.get_text(strip=True) for li in ul.find_all("li")]
-                data.append({"School Name": school, "Year": time, "Students' Info": items})
-    
+                for i in items:
+                    name=i.split(",")[0]
+                    placement=i.split(",")[1]
+                    data.append({"School Name": school, "Year": time, "Name": name, "Placement":placement})
+    print(data)
     return data
 
 def scrape_UCLA_graduate_placement():
@@ -432,15 +415,13 @@ def scrape_UCLA_graduate_placement():
                 if len(columns) == 2:
                     name = columns[0].get_text(strip=True)
                     placement = columns[1].get_text(strip=True)
-                    data.append({'school': school, 'year': year, 'name': name, 'placement': placement})
+                    data.append({'School': school, 'Year': year, 'Name': name, 'Placement': placement})
 
     #print(data)
     return data
 
-
 def scrape_Cornell():
     school = "Cornell University"
-    url_Cornell = "https://economics.cornell.edu/historical-placement-phd-students"
     data = []
 
     response = requests.get(url_Cornell)
@@ -459,14 +440,13 @@ def scrape_Cornell():
             name = columns[1].text.strip()
             placement = columns[2].text.strip()
             
-            data.append({'school': school, 'year': year, 'name': name, 'placement': placement})
+            data.append({'School': school, 'Year': year, 'Name': name, 'Placement': placement})
     
     #print(data)
     return data
 
 def scrape_Duke():
     school = "Duke University"
-    url_Duke = "https://econ.duke.edu/phd-program/prospective-students/placements"
     data = []
 
     response = requests.get(url_Duke)
@@ -498,17 +478,13 @@ def scrape_Duke():
                                 institution = columns[2].text.strip()
                                 if "Name" not in name:  # Check if it's not a header row
                                     placement_text = f"{position} + {institution}"
-                                    data.append({'school': school, 'year': year, 'name': name, 'placement': placement_text})
+                                    data.append({'School': school, 'Year': year, 'Name': name, 'Placement': placement_text})
     
     #print(data)
     return data
 
-import requests
-from bs4 import BeautifulSoup
-
 def scrape_Minnesota_Twin_cities():
     school = "University of Minnesota"
-    url_Minnesota = "https://cla.umn.edu/economics/graduate/job-placement-achievements"
     data = []
 
     response = requests.get(url_Minnesota)
@@ -526,7 +502,7 @@ def scrape_Minnesota_Twin_cities():
                 institution = columns[1].text.strip()
                 position = columns[2].text.strip()
                 placement_text = f"{position} + {institution}"
-                data.append({'school': school, 'year': '2023', 'name': name, 'placement': placement_text})
+                data.append({'School': school, 'Year': '2023', 'Name': name, 'Placement': placement_text})
 
     # Find the next table (if there is one)
     next_table = table.find_next('table')
@@ -540,14 +516,13 @@ def scrape_Minnesota_Twin_cities():
                 institution = columns[1].text.strip()
                 position = columns[2].text.strip()
                 placement_text = f"{position} + {institution}"
-                data.append({'school': school, 'year': '2022', 'name': name, 'placement': placement_text})
+                data.append({'School': school, 'Year': '2022', 'Name': name, 'Placement': placement_text})
     
     #print(data)
     return data
 
 def scrape_UC_Davis():
     school = "UC Davis"
-    url_UC_Davis = "https://economics.ucdavis.edu/graduate-student-placements"
     data = []
 
     response = requests.get(url_UC_Davis)
@@ -569,7 +544,7 @@ def scrape_UC_Davis():
                     if year in ["2022", "2021"]:
                         placement = columns[3].text.strip() + " " + columns[4].text.strip()  # Combine First Placement and First Job Title
                         name = f"{first_name} {last_name}"
-                        data.append({'school': school, 'year': year, 'name': name, 'placement': placement})
+                        data.append({'School': school, 'Year': year, 'Name': name, 'Placement': placement})
                 except IndexError:
                     pass  # Ignore rows with unexpected data
     #print(data)
@@ -577,7 +552,6 @@ def scrape_UC_Davis():
 
 def scrape_Brown_University():
     school = 'Brown University'
-    url_Brown = 'https://economics.brown.edu/academics/graduate/job-placement-results'
     data = []
 
     response = requests.get(url_Brown)
@@ -597,16 +571,15 @@ def scrape_Brown_University():
                 placement_info = '-'.join(placement_text.split('-')[1:]).strip()
                 
                 data.append({
-                    'school': school,
-                    'year': year_text,
-                    'name': name,
-                    'placement': placement_info
+                    'School': school,
+                    'Year': year_text,
+                    'Name': name,
+                    'Placement': placement_info
                 })
     #print(data)
     return data
 
 def scrape_UCSD():
-    url_UCSD = "https://economics.ucsd.edu/graduate-program/jobmarket-tab/placement-history.html"
     data = []
 
     response = requests.get(url_UCSD)
@@ -626,34 +599,39 @@ def scrape_UCSD():
                 if len(columns) == 4:
                     name = columns[1].text.strip()
                     placement = columns[3].text.strip()
-                    data.append({'school': 'UCSD', 'year': year, 'name': name, 'placement': placement})
+                    data.append({'School': 'UCSD', 'Year': year, 'Name': name, 'Placement': placement})
     print(data)
     return data
 
+scrape_data_UCBerkeley= scrape_UCBerkeley()
+#scrape_data_Yale= scrape_Yale()
+#scrape_data_Harvard = scrape_Harvard()
+#scrape_data_Stanford = scrape_Stanford()
+#scrape_data_Columbia = scrape_Columbia()
+#scrape_data_Princeton = scrape_Princeton()
+#scraped_data_New_York_University= scrape_New_York_University()
+#scraped_data_Northwestern_University= scrape_Northwestern_University()
+#scraped_data_University_of_Pennsylvania= scrape_University_of_Pennsylvania()
+#scraped_data_Boston_University= scrape_Boston_University()
+#scraped_data_WL = scrape_Washington_University_in_St_Louis()
+#scraped_data_Van= scrape_Vanderbilt_University()
+#scrape_data_Rochester= scrape_University_of_Rochester()
+#scraped_data_BC = scrape_BC()
+#scrape_data_Vir= scrape_University_of_Virginia()
+
+# scraped_data_UCLA = scrape_UCLA_graduate_placement()
+# scraped_data_Cornell = scrape_Cornell()
+# scraped_data_Duke = scrape_Duke()
+# scraped_data_Minesota = scrape_Minnesota_Twin_cities()
+#scraped_data_UT_Austin = scrape_UT_Austin()
+#scraped_data_UC_Davis= scrape_UC_Davis()
+#scraped_data_Brown = scrape_Brown_University()
+scraped_data_UCSD = scrape_UCSD()
 
 
-# scraped_data_WL = scrape_Washington_University_in_St_Louis()
-# scraped_data_Van= scrape_Vanderbilt_University()
-# scrape_data_Rochester= scrape_University_of_Rochester()
-# scrape_data_UCBerkeley= scrape_UCBerkeley()
-# scrape_data_Yale= scrape_Yale()
-# scrape_data_Harvard = scrape_Harvard()
-# scrape_data_Stanford = scrape_Stanford()
-# scrape_data_Columbia = scrape_Columbia()
-# scrape_data_Princeton = scrape_Princeton()
-# scraped_data_BC = scrape_BC()
-# scrape_data_Vir= scrape_University_of_Virginia()
-# scraped_data_PSU= scrape_PSU()
-# scraped_data_New_York_University= scrape_New_York_University()
-# scraped_data_Northwestern_University= scrape_Northwestern_University()
-# scraped_data_University_of_Pennsylvania= scrape_University_of_Pennsylvania()
-# scraped_data_Boston_University= scrape_Boston_University()
 
-# scraped_data = scrape_UCLA_graduate_placement()
-# scraped_data = scrape_Cornell()
-# scraped_data = scrape_Duke()
-# scraped_data = scrape_Minnesota_Twin_cities()
-#scraped_data = scrape_UT_Austin_graduate_placement()
-#scraped_data = scrape_UC_Davis()
-#scraped_data = scrape_Brown_University()
-scraped_data = scrape_UCSD()
+
+
+
+
+
