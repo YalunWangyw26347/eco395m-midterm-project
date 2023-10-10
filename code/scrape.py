@@ -401,7 +401,6 @@ def scrape_UCLA_graduate_placement():
     # Find the year elements with 2023 and 2022
     year_elements = soup.find_all('h4', class_='av-special-heading-tag', itemprop='headline')
     relevant_years = ['2023', '2022']
-
     for year_element in year_elements:
         year = year_element.get_text(strip=True)
 
@@ -482,6 +481,7 @@ def scrape_Duke():
                                     data.append({'School': school, 'Year': year, 'Name': name, 'Placement': placement_text})
 
     #print(data)
+    
     return data
 
 def scrape_Minnesota_Twin_cities():
@@ -519,7 +519,8 @@ def scrape_Minnesota_Twin_cities():
                 placement_text = f"{position} + {institution}"
                 data.append({'School': school, 'Year': '2022', 'Name': name, 'Placement': placement_text})
 
-    #print(data)
+    print(data)
+    print(len(data))
     return data
 
 def scrape_UC_Davis():
@@ -542,7 +543,7 @@ def scrape_UC_Davis():
                     first_name = columns[1].text.strip()
                     phd_date = columns[2].text.strip()
                     year = "20" + phd_date.split('-')[1]  # Extract year from PhD date
-                    if year in ["2022", "2021"]:
+                    if year in ["2023", "2022"]:
                         placement = columns[3].text.strip() + " " + columns[4].text.strip()  # Combine First Placement and First Job Title
                         name = f"{first_name} {last_name}"
                         data.append({'School': school, 'Year': year, 'Name': name, 'Placement': placement})
@@ -563,7 +564,7 @@ def scrape_Brown_University():
     for year in years:
         year_text = year.find('button', class_='accordion_trigger').text.strip()
 
-        if year_text in ['2023', '2022', '2021']:
+        if year_text in ['2023', '2022']:
             placements = year.find_all('li')
 
             for placement in placements:
@@ -601,7 +602,7 @@ def scrape_UCSD():
                     name = columns[1].text.strip()
                     placement = columns[3].text.strip()
                     data.append({'School': 'UCSD', 'Year': year, 'Name': name, 'Placement': placement})
-    print(data)
+    #print(data)
     return data
 
 #scrape_data_UCBerkeley= scrape_UCBerkeley()
@@ -619,24 +620,11 @@ def scrape_UCSD():
 #scrape_data_Rochester= scrape_University_of_Rochester()
 #scraped_data_BC = scrape_BC()
 #scrape_data_Vir= scrape_University_of_Virginia()
- # scraped_data_UCLA = scrape_UCLA_graduate_placement()
- # scraped_data_Cornell = scrape_Cornell()
- # scraped_data_Duke = scrape_Duke()
- # scraped_data_Minesota = scrape_Minnesota_Twin_cities()
- #scraped_data_UT_Austin = scrape_UT_Austin()
- #scraped_data_UC_Davis= scrape_UC_Davis()
- #scraped_data_Brown = scrape_Brown_University()
- #scraped_data_UCSD = scrape_UCSD()
-
-
-
-
-
-
-
-
-
-
-
-
-
+scraped_data_UCLA = scrape_UCLA_graduate_placement()
+scraped_data_Cornell = scrape_Cornell()
+scraped_data_Duke = scrape_Duke()
+scraped_data_Minesota = scrape_Minnesota_Twin_cities()
+#scraped_data_UT_Austin = scrape_UT_Austin()
+scraped_data_UC_Davis= scrape_UC_Davis()
+scraped_data_Brown = scrape_Brown_University()
+scraped_data_UCSD = scrape_UCSD()
