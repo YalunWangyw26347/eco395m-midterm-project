@@ -4,6 +4,10 @@ import gender_guesser.detector as gender
 INPUT_DIR = os.path.join("artifacts", "rawplacement.csv")
 OUTPUT_DIR = "artifacts"
 OUTPUT_PATH = os.path.join(OUTPUT_DIR, "cleanplacement.csv")
+# Read the CSV files
+ BASE_DIR = "artifacts"
+ csv_path1 = os.path.join(BASE_DIR, "rawplacement.csv")
+ csv_path2 = os.path.join(BASE_DIR, "Uchi PSU.csv")
 
 def load_file():
     with open(INPUT_DIR) as f:
