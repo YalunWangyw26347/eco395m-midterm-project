@@ -1,7 +1,6 @@
 import csv
 import requests
 from bs4 import BeautifulSoup
-
 url_Northwestern_University = "https://economics.northwestern.edu/graduate/prospective/placement.html"
 url_New_York_University = "https://as.nyu.edu/departments/econ/job-market/placements.html"
 url_Boston_University = "https://www.bu.edu/econ/academics/phd/recent-phd-placements/"
@@ -17,7 +16,6 @@ url_University_of_Rochester="https://www.sas.rochester.edu/eco/graduate/placemen
 url_University_of_Virginia="https://economics.virginia.edu/placement-history"
 url_Vanderbilt_University="https://as.vanderbilt.edu/economics/phd-placements/"
 url_Washington_University_in_St_Louis="https://economics.wustl.edu/job-market-and-placement"
-
 url_UCLA="https://economics.ucla.edu/graduate/graduate-profiles/graduate-placement-history/"
 url_Cornell = "https://economics.cornell.edu/historical-placement-phd-students"
 url_Duke = "https://econ.duke.edu/phd-program/prospective-students/placements"
@@ -35,14 +33,14 @@ def scrape_University_of_Pennsylvania():
     panels = soup.find_all('div', class_='panel-title')
     for panel in panels:
         year = panel.get_text(strip=True)  # Get the placement year
-        if '2022' in year or '2023' in year:
+        if '2022' in year or '2023' in year:# only collect data from 2023 and 2022
             associated_data = panel.find_next('div', class_='card-block panel-collapse collapse')
             if associated_data:
-                placements = associated_data.find_all('p')
+                placements = associated_data.find_all('p')# <p> have all information we want
                 for placement in placements:
                     text_content = placement.get_text(strip=True)
-                    if '-' in text_content:
-                        name = text_content.split('-')[0].strip()
+                    if '-' in text_content: # this url use '-' to link name and placement
+                        name = text_content.split('-')[0].strip() # name is the first part of this information splited by'-'
                         place = text_content.split('-')[1].strip()
                         data.append({'School': school, 'Year': year, 'Name': name, 'Placement': place})
     print(data)
@@ -65,6 +63,7 @@ def scrape_New_York_University():
                 data.append({
                     'School': school,
                     'Year': year_range,
+                    "Name":"",
                     'Placement': placement
                 })
     #print(data)
@@ -89,6 +88,7 @@ def scrape_Northwestern_University():
                     data.append({
                         'School': school,
                         'Year': year,
+                        'Name' : "",
                         'Placement': placement.get_text(strip=True)
                     })
     print(data)
@@ -141,7 +141,7 @@ def scrape_UCBerkeley():
                     placements = [li.get_text(strip=True) for li in student_list.find_all("li")]
                     for i in placements:
                         placement=i.split(";")[1]
-                        data.append({"School Name": school, "Year": year_text,"Placement":placement})
+                        data.append({"School Name": school, "Year": year_text,"Name":"","Placement":placement})
     print(data)
     return data
 
@@ -293,14 +293,15 @@ def scrape_BC():
     table_class_tags=soup.find("table")# information in this url are shown in one single table
     samples=table_class_tags.find_all("tr")# information we want are in <tr>
     for sample in samples[1:]:# skip the header
-        information= sample.find_all("td")
-        StudentName=information[0].text.strip()
+        information= sample.find_all("td")# information we want are in <td>
+        StudentName=information[0].text.strip() # name is the first part of information we get
         Year=information[1].text.strip()
         placement=information[2].text.strip()
-        if (Year== "2023") or (Year== "2022"):
+        if (Year== "2023") or (Year== "2022"): 
             data_all.append({"School":school,"Year":Year, "Name":StudentName, "Placemet":placement})
     print(data_all)
     return data_all
+
 
 def scrape_University_of_Rochester():
     data=[]
@@ -315,9 +316,9 @@ def scrape_University_of_Rochester():
         if "2023" in time or "2022" in time: 
             ul = strong.find_next("ul") #we only focus on <ul> after <strong>
             if ul:
-                items = [li.get_text(strip=True) for li in ul.find_all("li")]
+                items = [li.get_text(strip=True) for li in ul.find_all("li")] # <li> strore information we want
                 for i in items:
-                    name=i.split("-")[0]
+                    name=i.split("-")[0] # name is the first part of information splited by '-'
                     placement=i.split("-")[1]
                     data.append({"School Name": school, "Year": time, "Name": name, "Placement":placement})
     print(data)
@@ -329,18 +330,18 @@ def scrape_University_of_Virginia():
     url=url_University_of_Virginia
     response=requests.get(url)
     soup=BeautifulSoup(response.text, "html.parser")
-    table_class_tags=soup.find_all('table', class_="views-table cols-3")
+    table_class_tags=soup.find_all('table', class_="views-table cols-3") # in this url, information is stored in a table
     for table_class_tag in table_class_tags:
-        time=table_class_tag.find("caption").get_text()
+        time=table_class_tag.find("caption").get_text() #<caption> stores year information
         samples=table_class_tag.find_all("tr")
         if time=="2023" or time =="2022":
             for sample in samples:
-                if sample.find('th'):
+                if sample.find('th'): # the header part have differnet tag, <th> carries information we want
                     continue
                 else:
                     getname=sample.find("h4")
                     StudentName=getname.get_text().strip()
-                    getplacement=sample.find("td", class_="views-field views-field-field-initial-placement")
+                    getplacement=sample.find("td", class_="views-field views-field-field-initial-placement")# information about placement is in <td>
                     Placement=getplacement.get_text().strip()
                     data.append({"School":school,"Year":time, "Name":StudentName,"Placement":Placement})
     print(data)
@@ -359,7 +360,7 @@ def scrape_Vanderbilt_University():
         p_tags=div_year.find_all('p')
         for p_tag in p_tags:
             content = p_tag.get_text()
-            info_list = content.split('\r\n')#split the whole content to get seperate information 
+            info_list = content.split('\r\n')#split the whole content by'\r\n' to get seperate information 
             data_all.append({
                             "School": school,
                             "Year": time,
@@ -391,7 +392,7 @@ def scrape_Washington_University_in_St_Louis():
     return data
 
 
-scrape_data_UCBerkeley= scrape_UCBerkeley()
+#scrape_data_UCBerkeley= scrape_UCBerkeley()
 #scrape_data_Yale= scrape_Yale()
 #scrape_data_Harvard = scrape_Harvard()
 #scrape_data_Stanford = scrape_Stanford()
@@ -406,6 +407,12 @@ scrape_data_UCBerkeley= scrape_UCBerkeley()
 #scrape_data_Rochester= scrape_University_of_Rochester()
 #scraped_data_BC = scrape_BC()
 #scrape_data_Vir= scrape_University_of_Virginia()
+
+
+
+
+
+
 
 
 
