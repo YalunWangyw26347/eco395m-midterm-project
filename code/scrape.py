@@ -18,6 +18,14 @@ url_University_of_Virginia="https://economics.virginia.edu/placement-history"
 url_Vanderbilt_University="https://as.vanderbilt.edu/economics/phd-placements/"
 url_Washington_University_in_St_Louis="https://economics.wustl.edu/job-market-and-placement"
 
+url_UCLA="https://economics.ucla.edu/graduate/graduate-profiles/graduate-placement-history/"
+url_Cornell = "https://economics.cornell.edu/historical-placement-phd-students"
+url_Duke = "https://econ.duke.edu/phd-program/prospective-students/placements"
+url_UC_Davis = "https://economics.ucdavis.edu/graduate-student-placements"
+url_Minnesota = "https://cla.umn.edu/economics/graduate/job-placement-achievements"
+url_Brown = 'https://economics.brown.edu/academics/graduate/job-placement-results'
+url_UCSD = "https://economics.ucsd.edu/graduate-program/jobmarket-tab/placement-history.html"
+
 def scrape_University_of_Pennsylvania():
     school = "University of Pennsylvania"
     url = url_University_of_Pennsylvania 
