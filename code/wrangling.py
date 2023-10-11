@@ -4,22 +4,26 @@ import pandas as pd
 import gender_guesser.detector as gender
 
 ### Combining data: 
- # Read the CSV files
+# Read the CSV files
 BASE_DIR = "artifacts"
-# csv_path1 = os.path.join(BASE_DIR, "rawplacement.csv")
-# csv_path2 = os.path.join(BASE_DIR, "Uchi PSU.csv")
-# csv1 = pd.read_csv(csv_path1)
-# csv2 = pd.read_csv(csv_path2)
-#  # Combine the two dataframes
-# combined_csv = pd.concat([csv1, csv2])
-#  # Save the combined dataframe to a new CSV
-# combined_csv_path = os.path.join(BASE_DIR, "rawplacement1.csv")
-# combined_csv.to_csv(combined_csv_path, index=False)
+csv_path1 = os.path.join(BASE_DIR, "rawplacement.csv")
+csv_path2 = os.path.join(BASE_DIR, "Uchi PSU.csv")
+csv1 = pd.read_csv(csv_path1)
+csv2 = pd.read_csv(csv_path2)
+
+#Combine the two dataframes
+combined_csv = pd.concat([csv1, csv2])
+
+#Save the combined dataframe to a new CSV
+combined_csv_path = os.path.join(BASE_DIR, "rawplacement1.csv")
+combined_csv.to_csv(combined_csv_path, index=False)
 
 ### Clean the data, gender detector:
-INPUT_DIR = os.path.join("artifacts", "rawplacement.csv")
+INPUT_DIR = os.path.join("artifacts", "rawplacement1.csv")
+
 def load_file():
     d = gender.Detector()
+
     with open(INPUT_DIR) as f:
         reader = csv.reader(f)
         data_list=[]
@@ -38,13 +42,12 @@ def load_file():
             contains_not_keyword = any(keyword in data[3] for keyword in not_list)
             if contains_keyword ==True and contains_not_keyword== False:
                 data_clean.append(data)
-    
+
         for data in data_clean:
             name = data[2]
             first_name = name.split(" ")[0]
             guess = d.get_gender(first_name)
             data.append(guess)
-        
         for data in data_clean:
             sex= data[4]
             if "male" in sex:
@@ -53,27 +56,25 @@ def load_file():
                 data[4] ="female"
             if "female" and "male" not in sex:
                 data[4]="N/A"
-                
-        #print(len(data_clean))
+        # print(data_list)
         return data_clean
 
+
 def write_data_to_csv(rawdata, path):
-    #print(rawdata)
     with open(path, 'w', newline='') as csvfile:
         fieldnames = ["School", "Year", "Name", "Placement", "Gender"]
         writer = csv.writer(csvfile)
         writer.writerow(fieldnames)
         for row in rawdata:
+
             writer.writerow(row)
     return 
+
 if __name__ == "__main__":
+
     rawdata = load_file()
     BASE_DIR = "artifacts"
     CSV_PATH = os.path.join(BASE_DIR, "cleaned_placement.csv")
-
     os.makedirs(BASE_DIR, exist_ok=True)
     write_data_to_csv(rawdata, CSV_PATH)
-
-load= load_file()
-
 
