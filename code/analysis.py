@@ -3,7 +3,7 @@ import pandas as pd
 
 # Define file paths
 IN_PATH = os.path.join("artifacts", "cleaned_placement.csv")
-OUTPUT_DIR = "artifacts"
+OUTPUT_DIR = "analysis"
 
 
 # Read the cleaned CSV file into a DataFrame
