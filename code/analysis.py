@@ -13,8 +13,9 @@ df = pd.read_csv(IN_PATH)
 male_df = df[df['Gender'] == 'male']
 female_df = df[df['Gender'] == 'female']
 
-# Function to calculate and save tier distribution for male and female candidates
+
 def calculate_distribution(data, output_filename):
+    """calculate the proportion that people from which School Tier will work for which School Tier, and write them into a csv file"""
     result_df = pd.DataFrame(columns=['School Tier', 'Placement Tier', 'Percentage'])
 
     for school_tier in ['Tier 1', 'Tier 2', 'Tier 3']:
