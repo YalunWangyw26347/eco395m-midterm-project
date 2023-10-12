@@ -1,4 +1,4 @@
-<h1 align="center" id="heading"> <span style="color:red"> <em> Title </span> </h1>
+<h1 align="center" id="heading"> <span style="color:red"> <em> Hierarchy in US Faculty Hiring: Evidence from 2023-2021 Economics Ph.D. Placement </span> </h1>
 <h3 align="center" id="heading"> 12 October 2023 <br> 
 <em> Python, Big Data, and Databases (ECO395m)  </em> <br> <h3>
 <h3 align="center" id="heading"> Yundi Xiao, Yalun Wang, Vimoli Mehta </h3>
