@@ -1,5 +1,4 @@
-<h1 align="center" id="heading"> <span style="color:red"> <em> Hierarchy in US Faculty Hiring: </em> <br> Evidence from 2023-2021 Economics Ph.D. Placement </span> </h1>
-
+# Hierarchy in US Faculty Hiring:Evidence from 2023-2021 Economics Ph.D. Placement 
 # 12 October 2023 
 # Python, Big Data, and Databases (ECO395m) 
 # Yundi Xiao, Yalun Wang, Vimoli Mehta 
