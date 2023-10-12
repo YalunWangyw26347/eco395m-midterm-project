@@ -2,7 +2,9 @@ import os
 import csv
 import pandas as pd
 import gender_guesser.detector as gender
-
+BASE_DIR = "artifacts"
+    CSV_PATH = os.path.join(BASE_DIR, "cleaned_placement.csv")
+    os.makedirs(BASE_DIR, exist_ok=True)
 ### Combining data: 
 # Read the CSV files
 BASE_DIR = "artifacts"
@@ -56,7 +58,7 @@ def load_file():
                 data[4] ="female"
             if "female" and "male" not in sex:
                 data[4]="N/A"
-        # print(data_list)
+        
         return data_clean
 
 
@@ -73,8 +75,6 @@ def write_data_to_csv(rawdata, path):
 if __name__ == "__main__":
 
     rawdata = load_file()
-    BASE_DIR = "artifacts"
-    CSV_PATH = os.path.join(BASE_DIR, "cleaned_placement.csv")
-    os.makedirs(BASE_DIR, exist_ok=True)
+    
     write_data_to_csv(rawdata, CSV_PATH)
 
