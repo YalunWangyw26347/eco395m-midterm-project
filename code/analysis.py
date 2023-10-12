@@ -5,8 +5,6 @@ import pandas as pd
 IN_PATH = os.path.join("artifacts", "cleaned_placement.csv")
 OUTPUT_DIR = "analysis"
 
-
-# Read the cleaned CSV file into a DataFrame
 df = pd.read_csv(IN_PATH)
 
 # Separate data into male and female candidates
