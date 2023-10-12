@@ -24,8 +24,8 @@ combined_csv.to_csv(combined_csv_path, index=False)
 INPUT_DIR = os.path.join("artifacts", "rawplacement_combined.csv")
 
 def load_and_clean_file():
+    """ load the combined raw data, and clean the data by making years to form we want, only including data working as professor , and adding gender column by prediction."""
     d = gender.Detector()
-
     with open(INPUT_DIR) as f:
         reader = csv.reader(f)
         data_list=[]
@@ -63,6 +63,7 @@ def load_and_clean_file():
 
 
 def write_data_to_csv(rawdata, path):
+    """wirte the cleandata"""
     with open(path, 'w', newline='') as csvfile:
         fieldnames = ["School", "Year", "Name", "Placement", "Gender"]
         writer = csv.writer(csvfile)
