@@ -94,15 +94,13 @@ For PhDs from tier 3 universities, 4% of them are employed by tier 1 universitie
 
 ![image text](./analysis/overall_tier_distribution.png)
 
-
-
-![image text](./analysis/female_tier_distribution.png)
-
- 
+In regard to gender, we analyzed the observations that have the gender information (Generated from GuessGender API). For male PhDs, we have 97 male candidates and 18% i.e. 17 males were hired for Tier-1 placements. 9.09 % of the male PhDs are employed in Tier-2 and Tier-3 universities.
 
 ![image text](./analysis/male_tier_distribution.png)
 
+Similarly, we were able to identify 35 females out of which 10 ( 30%) female PhDs were employed by tier-one universities. 7.69% of females secured placements in Tier-2 and Tier-3 each which is less in comparison to the male ratio.
 
+![image text](./analysis/female_tier_distribution.png)
 
 <h3> Conclusion </h3> 
 From the results, we can derive that there is a 23% chance that if you are in Top Tier -1 universities you would result in top-3 tier universities, and it doesn’t mean that if you are not able to secure a Tier-1 or Tier 2 university for PhD there is still a high chance you can be secured in a university greater than your current university.
