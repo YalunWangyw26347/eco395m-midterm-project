@@ -6,6 +6,38 @@
 <h3> Introduction </h3>
 
 <h3> Sources of Data </h3>
+Source of Data
+
+Sources of data include placement information from 24 top Economics departments across the US.  Ranking for the Economics PhD programs was obtained from US.News(2022), and we pick top 3 tiers of universities.The final list of universities considered were:
+1.Harvard University
+2.Stanford University
+3.Princeton University
+4.University of California—​Berkeley
+5.University of Chicago
+6.Yale University
+7.Northwestern University
+8.Columbia University
+9.University of Pennsylvania
+10.New York University
+11.University of California—​Los Angeles
+12.Cornell University
+13.Boston_University
+14.Boston_College
+15.University_of_Rochester
+16.University_of_Virginia
+17.Vanderbilt_University
+18.Washington_University_in_St_Louis
+19.Duke University
+20.Brown University
+21.University of California—​Davis
+22.University of Minnesota—​Twin Cities
+23.University of California—​San Diego
+24.Pennsylvania State University—​University Park
+
+We only include part of the universities in the rank, and there can be a more comprehensive project by analyzing more universities.
+
+From each university’s PhD placement page, information about student’s name, year they graduate, advisor’s name, dissertation name, placement etc. are shown. But we only pick student’s name, year they graduate and placement for analyzing. Besides, after scraping
+Information we want and dropping some samples( those sample who do not worked as a professor after graduation), we also add the gender column by using Gender_Guesser. API, but it has some restrictions, and there can be improvements in further project.
 
 <h3> Running the code </h3>
 Our code will be executed in a Python environment and using packages specified in requirements.txt. You can install those packages we use in the project by using “pip install -r requirements.txt”. We have a sequence for running these .py files in the code folder.  You can get the result we have by doing so: 
