@@ -3,25 +3,17 @@ import csv
 import requests
 from bs4 import BeautifulSoup
 
-url_Northwestern_University = (
-    "https://economics.northwestern.edu/graduate/prospective/placement.html"
-)
+url_Northwestern_University = "https://economics.northwestern.edu/graduate/prospective/placement.html"
 url_New_York_University = "https://as.nyu.edu/departments/econ/job-market/placements.html"
 url_Boston_University = "https://www.bu.edu/econ/academics/phd/recent-phd-placements/"
-url_University_of_California_Berkeley = (
-    "https://www.econ.berkeley.edu/grad/program/placement-outcomes"
-)
+url_University_of_California_Berkeley = "https://www.econ.berkeley.edu/grad/program/placement-outcomes"
 url_Princeton_University = "https://economics.princeton.edu/graduate-program/job-market-and-placements/statistics-on-past-placements/"
 url_Harvard_University = "https://economics.harvard.edu/placement"
 url_Stanford_University = "https://economics.stanford.edu/student-placement"
 url_Yale_University = "https://economics.yale.edu/phd-program/placement/outcomes"
 url_Columbia_University = "https://econ.columbia.edu/phd/placement/"
-url_University_of_Pennsylvania = (
-    "https://economics.sas.upenn.edu/graduate/prospective-students/placement-information"
-)
-url_Boston_College = (
-    "https://www.bc.edu/bc-web/schools/mcas/departments/economics/graduate/placements.html"
-)
+url_University_of_Pennsylvania ="https://economics.sas.upenn.edu/graduate/prospective-students/placement-information"
+url_Boston_College = "https://www.bc.edu/bc-web/schools/mcas/departments/economics/graduate/placements.html"
 url_University_of_Rochester = "https://www.sas.rochester.edu/eco/graduate/placement.html"
 url_University_of_Virginia = "https://economics.virginia.edu/placement-history"
 url_Vanderbilt_University = "https://as.vanderbilt.edu/economics/phd-placements/"
@@ -40,7 +32,9 @@ os.makedirs(BASE_DIR, exist_ok=True)
 
 
 def scrape_University_of_Pennsylvania():
-    """Take University of Pennsylvania Phd placement url and return school name, year they graduate, students' name and placement in a list of dicts."""
+    """Take University of Pennsylvania Phd placement url and return 
+    school name, year they graduate, students' name and placement in 
+    a list of dicts."""
     school = "University of Pennsylvania"
     url = url_University_of_Pennsylvania
     data = []
@@ -73,7 +67,8 @@ def scrape_University_of_Pennsylvania():
 
 
 def scrape_New_York_University():
-    """Take New York University Phd placement url and return school name, year they graduate, students' name and placement in a list of dicts."""
+    """Take New York University Phd placement url and return school name,
+    year they graduate, students' name and placement in a list of dicts."""
     school = "New York University"
     url = url_New_York_University
     data = []
@@ -102,7 +97,9 @@ def scrape_New_York_University():
 
 
 def scrape_Northwestern_University():
-    """Take Northwestern University Phd placement url and return school name, year they graduate, students' name and placement in a list of dicts."""
+    """Take Northwestern University Phd placement url and return school 
+    name, year they graduate, students' name and placement in a list of 
+    dicts."""
     school = "Northwestern University"
     url = url_Northwestern_University
     data = []
@@ -130,7 +127,8 @@ def scrape_Northwestern_University():
 
 
 def scrape_Boston_University():
-    """Take Boston University Phd placement url and return school name, year they graduate, students' name and placement in a list of dicts."""
+    """Take Boston University Phd placement url and return school name, 
+    year they graduate, students' name and placement in a list of dicts."""
     school = "Boston University"
     url = url_Boston_University
     data = []
@@ -161,7 +159,9 @@ def scrape_Boston_University():
 
 
 def scrape_UCBerkeley():
-    """Take University of California, Berkeley Phd placement url and return school name, year they graduate, students' name and placement in a list of dicts."""
+    """Take University of California, Berkeley Phd placement url and 
+    return school name, year they graduate, students' name and placement 
+    in a list of dicts."""
     school = "University of California, Berkeley"
     url = url_University_of_California_Berkeley
     data = []
@@ -193,7 +193,8 @@ def scrape_UCBerkeley():
 
 
 def scrape_Princeton():
-    """Take Princeton University Phd placement url and return school name, year they graduate, students' name and placement in a list of dicts."""
+    """Take Princeton University Phd placement url and return school name,
+      year they graduate, students' name and placement in a list of dicts."""
     school = "Princeton University"
     url = url_Princeton_University
     data = []
@@ -219,7 +220,8 @@ def scrape_Princeton():
 
 
 def scrape_Columbia():
-    """Take Columbia University Phd placement url and return school name, year they graduate, students' name and placement in a list of dicts."""
+    """Take Columbia University Phd placement url and return school name, 
+    year they graduate, students' name and placement in a list of dicts."""
     school = "Columbia University"
     url = url_Columbia_University
     data = []
@@ -260,7 +262,8 @@ def scrape_Columbia():
 
 
 def scrape_Yale():
-    """Take Yale University Phd placement url and return school name, year they graduate, students' name and placement in a list of dicts."""
+    """Take Yale University Phd placement url and return school name, 
+    year they graduate, students' name and placement in a list of dicts."""
     school = "Yale University"
     url = url_Yale_University
     data = []
@@ -292,7 +295,8 @@ def scrape_Yale():
 
 
 def scrape_Stanford():
-    """Take Stanford University Phd placement url and return school name, year they graduate, students' name and placement in a list of dicts."""
+    """Take Stanford University Phd placement url and return school name,
+      year they graduate, students' name and placement in a list of dicts."""
     school = "Stanford University"
     url = url_Stanford_University
     data = []
@@ -327,7 +331,8 @@ def scrape_Stanford():
 
 
 def scrape_Harvard():
-    """Take Harvard University Phd placement url and return school name, year they graduate, students' name and placement in a list of dicts."""
+    """Take Harvard University Phd placement url and return school name,
+      year they graduate, students' name and placement in a list of dicts."""
     school = "Harvard University"
     url = url_Harvard_University
     data = []
@@ -369,7 +374,8 @@ def scrape_Harvard():
 
 
 def scrape_BC():
-    """Take Boston College Phd placement url and return school name, year they graduate, students' name and placement in a list of dicts."""
+    """Take Boston College Phd placement url and return school name, 
+    year they graduate, students' name and placement in a list of dicts."""
     school = "Boston College"
     data_all = []
     url = url_Boston_College
@@ -396,7 +402,9 @@ def scrape_BC():
 
 
 def scrape_University_of_Rochester():
-    """Take University of Rochester Phd placement url and return school name, year they graduate, students' name and placement in a list of dicts."""
+    """Take University of Rochester Phd placement url and return school 
+    name, year they graduate, students' name and placement in a list 
+    of dicts."""
     data = []
     school = "University of Rochester"
     url = url_University_of_Rochester
@@ -427,7 +435,9 @@ def scrape_University_of_Rochester():
 
 
 def scrape_University_of_Virginia():
-    """Take University of Virginia Phd placement url and return school name, year they graduate, students' name and placement in a list of dicts."""
+    """Take University of Virginia Phd placement url and return school 
+    name, year they graduate, students' name and placement in a list
+    of dicts."""
     data = []
     school = "University of Virginia"
     url = url_University_of_Virginia
@@ -465,7 +475,8 @@ def scrape_University_of_Virginia():
 
 
 def scrape_Vanderbilt_University():
-    """Take Vanderbilt University Phd placement url and return school name, year they graduate, students' name and placement in a list of dicts."""
+    """Take Vanderbilt University Phd placement url and return school name,
+    year they graduate, students' name and placement in a list of dicts."""
     school = "Vanderbilt University"
     data_all = []
     url = url_Vanderbilt_University
@@ -496,7 +507,8 @@ def scrape_Vanderbilt_University():
 
 
 def scrape_Washington_University_in_St_Louis():
-    """Take Washington University in St Louis Phd placement url and return school name, year they graduate, students' name and placement in a list of dicts."""
+    """Take Washington University in St Louis Phd placement url and return school 
+    name, year they graduate, students' name and placement in a list of dicts."""
     data = []
     school = "Washington University in St Louis"
     url = url_Washington_University_in_St_Louis
@@ -525,7 +537,9 @@ def scrape_Washington_University_in_St_Louis():
 
 
 def scrape_UCLA_graduate_placement():
-    """Take University of California, Los Angeles Phd placement url and return school name, year they graduate, students' name and placement in a list of dicts."""
+    """Take University of California, Los Angeles Phd placement url
+      and return school name, year they graduate, students' name and 
+      placement in a list of dicts."""
     school = "The University of California, Los Angeles"
     data = []
 
@@ -562,7 +576,8 @@ def scrape_UCLA_graduate_placement():
 
 
 def scrape_Cornell():
-    """Take Cornell University Phd placement url and return school name, year they graduate, students' name and placement in a list of dicts."""
+    """Take Cornell University Phd placement url and return school name,
+    year they graduate, students' name and placement in a list of dicts."""
     school = "Cornell University"
     data = []
 
@@ -588,7 +603,8 @@ def scrape_Cornell():
 
 
 def scrape_Duke():
-    """Take Duke University Phd placement url and return school name, year they graduate, students' name and placement in a list of dicts."""
+    """Take Duke University Phd placement url and return school name, 
+    year they graduate, students' name and placement in a list of dicts."""
     school = "Duke University"
     data = []
 
@@ -634,7 +650,8 @@ def scrape_Duke():
 
 
 def scrape_Minnesota_Twin_cities():
-    """Take University of Minnesota Phd placement url and return school name, year they graduate, students' name and placement in a list of dicts."""
+    """Take University of Minnesota Phd placement url and return school name, 
+    year they graduate, students' name and placement in a list of dicts."""
     school = "University of Minnesota"
     data = []
 
@@ -687,7 +704,8 @@ def scrape_Minnesota_Twin_cities():
 
 
 def scrape_UC_Davis():
-    """Take UC Davis Phd placement url and return school name, year they graduate, students' name and placement in a list of dicts."""
+    """Take UC Davis Phd placement url and return school name, 
+    year they graduate, students' name and placement in a list of dicts."""
     school = "UC Davis"
     data = []
 
@@ -727,7 +745,8 @@ def scrape_UC_Davis():
 
 
 def scrape_Brown_University():
-    """Take Brown University Phd placement url and return school name, year they graduate, students' name and placement in a list of dicts."""
+    """Take Brown University Phd placement url and return school name, 
+    year they graduate, students' name and placement in a list of dicts."""
     school = "Brown University"
     data = []
 
@@ -760,7 +779,8 @@ def scrape_Brown_University():
 
 
 def scrape_UCSD():
-    """Take UCSD Phd placement url and return school name, year they graduate, students' name and placement in a list of dicts."""
+    """Take UCSD Phd placement url and return school name, year 
+    they graduate, students' name and placement in a list of dicts."""
     data = []
 
     response = requests.get(url_UCSD)
