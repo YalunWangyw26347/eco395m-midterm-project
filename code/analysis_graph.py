@@ -17,10 +17,10 @@ def calculate_distribution(data):
     """Calculate the proportion that people from which School Tier will work for which School Tier."""
     result_df = pd.DataFrame(columns=['School Tier', 'Placement Tier', 'Percentage'])
 
-    for school_tier in ['Tier 1', 'Tier 2', 'Tier 3']:
+    for school_tier in ['Tier 1', 'Tier 2', 'Tier 3']:    
         for placement_tier in ['Tier 1', 'Tier 2', 'Tier 3', 'Others']:
-            total_candidates = len(data[data['School Tier'] == school_tier])
-            assistant_professors = len(data[(data['School Tier'] == school_tier) & (data['Placement Tier'] == placement_tier)])
+            total_candidates = len(data[data['School Tier'] == school_tier]) 
+            assistant_professors = len(data[(data['School Tier'] == school_tier) & (data['Placement Tier'] == placement_tier)])  # Comparing school and placement tier as the for loop changes 
             percentage = (assistant_professors / total_candidates) * 100
             result_df = pd.concat([result_df, pd.DataFrame({'School Tier': [school_tier], 'Placement Tier': [placement_tier], 'Percentage': [percentage]})], ignore_index=True)
 
