@@ -58,6 +58,7 @@ Also, delivering such project with respect to other department will be also mean
 <h3> Methodology </h3> 
 In this project, we scrape our Phd placement data from economics department. We have year, school_name, student’s name, placement, these 4 variables to restore information we need in analyze. For“placement” variable, it varies a lot among universities, so we have to make a list of words we want (like professor, university, and so on), and a list of words we do not want(like postdoc, because we do not want include postdoc samples into analysis). Then filter placements that have words we want and don’t have word we do not want, and add those samples in cleaned data. In addition, using gender_guesser API to get gender information. Then, classify universities into different tiers and add columns carrying tier information in data set, and the final data is [[university name, year, student name,placement, gender, school_tier,placement_tier ]... ...]
 <h3> Results </h3> 
+
 ![image text](./analysis/overall_tier_distribution.png)
 
 ![image text](./analysis/female_tier_distribution.png)
