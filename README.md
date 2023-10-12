@@ -56,10 +56,7 @@ Sources of data include placement information from 24 top Economics departments 
 
 24.Pennsylvania State University, ​University Park
 
-We only include part of the universities in the rank, and there can be a more comprehensive project by analyzing more universities.
-
-From each university’s PhD placement page, information about student’s name, year they graduate, advisor’s name, dissertation name, placement etc. are shown. But we only pick student’s name, year they graduate and placement for analyzing. Besides, after scraping
-Information we want and dropping some samples( those sample who do not worked as a professor after graduation), we also add the gender column by using Gender_Guesser. API, but it has some restrictions, and there can be improvements in further project.
+We scraped data from each university’s Ph.D. placement page, focusing on the student’s name, placement year, and placement. We cleaned the data set by dropping the observations with non-academic placement. We also add the gender variable by using Gender_Guesser. API, which generates the guessed gender from the name of each observation. 
 
 <h3> Running the code </h3>
 Our code will be executed in a Python environment and using packages specified in requirements.txt. You can install those packages we use in the project by using “pip install -r requirements.txt”. We have a sequence for running these .py files in the code folder.  You can get the result we have by doing so: 
