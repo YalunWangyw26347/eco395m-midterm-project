@@ -10,11 +10,11 @@
 <h3> Running the code </h3>
 
 <h3> Limitations </h3> 
-1. Proper Cleaning : While scraping we realized that data provided by Universities for their placement of PhD candidates differs widely. For e.g, UCSD(University of California- San Diego) directly displayed a candidate working at UT Austin LBJ School, this data was indeed worthy for us but since the name of school has been used as an acronym , it was difficult for us to find such acronyms while cleaning the scraped dataset. The cleaning code involves looking at keywords like univeristy, college etc , however it can't catch keywords like UT has it would be extremely specific.
-
-2. Imbalance of Dataset:This analysis could be improved by having an equal proportion of universities different tiers. While, we have a list of universities which can categorize to Tier-1,2 and 3 but all universities were not scrapable. Also, from list of tier-1 univerities it might be possible we have more PHD candidates pursuing the academic profession than the PHD candidates from Tier-2 this leads to an imbalance of dataset and it can lead to a biased observation.
-
-3. Gender Detection and Prediction : For displaying ratio of Men and Women candidates pursuing academic profession we used a Gender Detection library from python to predict the gender based on names we scraped. The accuracy of the library is not going to be 100 % , as there are many names with can be assigned to both genders.
+<ol>
+  <li>Proper Cleaning: While scraping, we realized that data provided by universities for their placement of PhD candidates differs widely. For example, UCSD (University of California - San Diego) directly displayed a candidate working at UT Austin LBJ School. This data was indeed valuable to us, but since the name of the school has been used as an acronym, it was difficult for us to find such acronyms while cleaning the scraped dataset. The cleaning code involves looking for keywords like "university" and "college," but it can't catch keywords like "UT" as it would be extremely specific.</li>
+  <li>Imbalance of Dataset: This analysis could be improved by having an equal proportion of universities from different tiers. While we have a list of universities that can be categorized into Tier-1, Tier-2, and Tier-3, not all universities were scrapable. Also, from the list of Tier-1 universities, it might be possible that we have more PhD candidates pursuing the academic profession than the PhD candidates from Tier-2. This leads to an imbalance in the dataset and can lead to biased observations.</li>
+  <li>Gender Detection and Prediction: For displaying the ratio of men and women candidates pursuing an academic profession, we used a Gender Detection library from Python to predict the gender based on names we scraped. The accuracy of the library is not going to be 100%, as there are many names that can be assigned to both genders.</li>
+</ol>
 
 <h3> Methodology </h3> 
 
