@@ -27,9 +27,8 @@ url_Brown = 'https://economics.brown.edu/academics/graduate/job-placement-result
 url_UCSD = "https://economics.ucsd.edu/graduate-program/jobmarket-tab/placement-history.html"
 
 BASE_DIR = "artifacts"
-    CSV_PATH = os.path.join(BASE_DIR, "rawplacement.csv")
-
-    os.makedirs(BASE_DIR, exist_ok=True)
+CSV_PATH = os.path.join(BASE_DIR, "rawplacement.csv")
+os.makedirs(BASE_DIR, exist_ok=True)
 def scrape_University_of_Pennsylvania():
     """Take University of Pennsylvania Phd placement url and return school name, year they graduate, students' name and placement in a list of dicts."""
     school = "University of Pennsylvania"
@@ -103,7 +102,7 @@ def scrape_Northwestern_University():
     return data
 
 def scrape_Boston_University():
-     """Take Boston University Phd placement url and return school name, year they graduate, students' name and placement in a list of dicts."""
+    """Take Boston University Phd placement url and return school name, year they graduate, students' name and placement in a list of dicts."""
     school = "Boston University"
     url = url_Boston_University
     data = []
@@ -156,7 +155,7 @@ def scrape_UCBerkeley():
     return data
 
 def scrape_Princeton():
-     """Take Princeton University Phd placement url and return school name, year they graduate, students' name and placement in a list of dicts."""
+    """Take Princeton University Phd placement url and return school name, year they graduate, students' name and placement in a list of dicts."""
     school = "Princeton University"
     url = url_Princeton_University 
     data = []
@@ -277,7 +276,7 @@ def scrape_Harvard():
     target_years = ["Graduate Student Placement 2023", "Graduate Student Placement 2022"]
     for target_year in target_years:
         # Find the h3 tag containing the year
-        year_tag = soup.find("h3", text=target_year)
+        year_tag = soup.find("h3", string=target_year)
         if year_tag:
             # Try to find the table within the 'accordion-panel' following the year_tag
             table = year_tag.find_next("div", class_="accordion-panel").find("table", class_="os-table")
@@ -652,7 +651,7 @@ if __name__ == "__main__":
 scrape_data_Yale= scrape_Yale()
 scrape_data_Harvard = scrape_Harvard()
 
-    scrape_data_Stanford = scrape_Stanford()
+scrape_data_Stanford = scrape_Stanford()
 scrape_data_Columbia = scrape_Columbia()
 scrape_data_Princeton = scrape_Princeton()
 scraped_data_New_York_University= scrape_New_York_University()
@@ -671,7 +670,7 @@ scraped_data_Minesota = scrape_Minnesota_Twin_cities()
 scraped_data_UC_Davis= scrape_UC_Davis()
 scraped_data_Brown = scrape_Brown_University()
 scraped_data_UCSD = scrape_UCSD()
-    data = raw_output()
-    
-    write_data_to_csv(data, CSV_PATH)
+
+data = raw_output()
+write_data_to_csv(data, CSV_PATH)
 
