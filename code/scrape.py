@@ -26,6 +26,10 @@ url_Minnesota = "https://cla.umn.edu/economics/graduate/job-placement-achievemen
 url_Brown = 'https://economics.brown.edu/academics/graduate/job-placement-results'
 url_UCSD = "https://economics.ucsd.edu/graduate-program/jobmarket-tab/placement-history.html"
 
+BASE_DIR = "artifacts"
+    CSV_PATH = os.path.join(BASE_DIR, "rawplacement.csv")
+
+    os.makedirs(BASE_DIR, exist_ok=True)
 def scrape_University_of_Pennsylvania():
     school = "University of Pennsylvania"
     url = url_University_of_Pennsylvania 
@@ -45,7 +49,7 @@ def scrape_University_of_Pennsylvania():
                         name = text_content.split('-')[0].strip() # name is the first part of this information splited by'-'
                         place = text_content.split('-')[1].strip()
                         data.append({'School': school, 'Year': year, 'Name': name, 'Placement': place})
-    # print(data)
+
     return data
 
 def scrape_New_York_University():
@@ -68,6 +72,7 @@ def scrape_New_York_University():
                     "Name":"",
                     'Placement': placement
                 })
+
     return data
 
 def scrape_Northwestern_University():
@@ -91,6 +96,7 @@ def scrape_Northwestern_University():
                         'Name' : "",
                         'Placement': placement.get_text(strip=True)
                     })
+
     return data
 
 def scrape_Boston_University():
@@ -118,6 +124,7 @@ def scrape_Boston_University():
                         'Placement': placement
                         
                     })
+
     return data
  
 def scrape_UCBerkeley():
@@ -140,6 +147,7 @@ def scrape_UCBerkeley():
                     for i in placements:
                         placement=i.split(";")[0]+ i.split(";")[1]
                         data.append({"School": school, "Year": year_text,"Name":"","Placement":placement})
+
     return data
 
 def scrape_Princeton():
@@ -161,6 +169,7 @@ def scrape_Princeton():
                 "Name": " ",
                 "Placement": institution  +  position
             })
+
     return data
 
 def scrape_Columbia():
@@ -189,6 +198,7 @@ def scrape_Columbia():
                             "Name": name,
                             "Placement": placement
                         })
+
     return data
 
 def scrape_Yale():
@@ -216,6 +226,7 @@ def scrape_Yale():
                             "Name": name_tag.text.strip(),
                             "Placement": placement_tag.text.strip()
                         })
+
     return data
 
 def scrape_Stanford():
@@ -244,6 +255,7 @@ def scrape_Stanford():
                             "Name": name,
                             "Placement": placement
                         })
+
     return data
 
 def scrape_Harvard():
@@ -272,6 +284,7 @@ def scrape_Harvard():
                             "Name": name,
                             "Placement": placement
                         })
+
     return data
 
 def scrape_BC():
@@ -289,6 +302,7 @@ def scrape_BC():
         placement=information[2].text.strip()
         if (Year== "2023") or (Year== "2022"): 
             data_all.append({"School":school,"Year":Year, "Name":StudentName, "Placement":placement})
+
     return data_all
 
 
@@ -299,7 +313,6 @@ def scrape_University_of_Rochester():
     response=requests.get(url)
     soup=BeautifulSoup(response.text, "html.parser")
     strong_tags = soup.find_all("strong")  # find all the <strong>, inside it is time information
-    #print(strong_tags)
     for strong in strong_tags: # check every <strong>
         time = strong.get_text() # get information in <strong>, the time information   
         if "2023" in time or "2022" in time: 
@@ -310,6 +323,7 @@ def scrape_University_of_Rochester():
                     name=i.split("-")[0] # name is the first part of information splited by '-'
                     placement=i.split("-")[1]
                     data.append({"School": school, "Year": time, "Name": name, "Placement":placement})
+
     return data
 
 def scrape_University_of_Virginia():
@@ -332,6 +346,7 @@ def scrape_University_of_Virginia():
                     getplacement=sample.find("td", class_="views-field views-field-field-initial-placement")# information about placement is in <td>
                     Placement=getplacement.get_text().strip()
                     data.append({"School":school,"Year":time, "Name":StudentName,"Placement":Placement})
+
     return data
 
 def scrape_Vanderbilt_University():
@@ -354,6 +369,7 @@ def scrape_Vanderbilt_University():
                             "Name": info_list[0],
                             "Placement": str(info_list[1:])# mix information regarding with job title and university they work for
                         })
+
 
     return data_all
 
@@ -559,7 +575,7 @@ def scrape_Brown_University():
                     'Name': name,
                     'Placement': placement_info
                 })
-   
+
     return data
 
 def scrape_UCSD():
@@ -588,25 +604,7 @@ def scrape_UCSD():
 scrape_data_UCBerkeley= scrape_UCBerkeley()
 scrape_data_Yale= scrape_Yale()
 scrape_data_Harvard = scrape_Harvard()
-scrape_data_Stanford = scrape_Stanford()
-scrape_data_Columbia = scrape_Columbia()
-scrape_data_Princeton = scrape_Princeton()
-scraped_data_New_York_University= scrape_New_York_University()
-scraped_data_Northwestern_University= scrape_Northwestern_University()
-scraped_data_University_of_Pennsylvania= scrape_University_of_Pennsylvania()
-scraped_data_Boston_University= scrape_Boston_University()
-scraped_data_WL = scrape_Washington_University_in_St_Louis()
-scraped_data_Van= scrape_Vanderbilt_University()
-scrape_data_Rochester= scrape_University_of_Rochester()
-scraped_data_BC = scrape_BC()
-scrape_data_Vir= scrape_University_of_Virginia()
-scraped_data_UCLA = scrape_UCLA_graduate_placement()
-scraped_data_Cornell = scrape_Cornell()
-scraped_data_Duke = scrape_Duke()
-scraped_data_Minesota = scrape_Minnesota_Twin_cities()
-scraped_data_UC_Davis= scrape_UC_Davis()
-scraped_data_Brown = scrape_Brown_University()
-scraped_data_UCSD = scrape_UCSD()
+
 
 def raw_output():
     raw_output = scrape_data_UCBerkeley + scrape_data_Yale + scrape_data_Harvard + scrape_data_Stanford\
@@ -630,10 +628,26 @@ def write_data_to_csv(data, path):
 
 
 if __name__ == "__main__":
+    scrape_data_Stanford = scrape_Stanford()
+scrape_data_Columbia = scrape_Columbia()
+scrape_data_Princeton = scrape_Princeton()
+scraped_data_New_York_University= scrape_New_York_University()
+scraped_data_Northwestern_University= scrape_Northwestern_University()
+scraped_data_University_of_Pennsylvania= scrape_University_of_Pennsylvania()
+scraped_data_Boston_University= scrape_Boston_University()
+scraped_data_WL = scrape_Washington_University_in_St_Louis()
+scraped_data_Van= scrape_Vanderbilt_University()
+scrape_data_Rochester= scrape_University_of_Rochester()
+scraped_data_BC = scrape_BC()
+scrape_data_Vir= scrape_University_of_Virginia()
+scraped_data_UCLA = scrape_UCLA_graduate_placement()
+scraped_data_Cornell = scrape_Cornell()
+scraped_data_Duke = scrape_Duke()
+scraped_data_Minesota = scrape_Minnesota_Twin_cities()
+scraped_data_UC_Davis= scrape_UC_Davis()
+scraped_data_Brown = scrape_Brown_University()
+scraped_data_UCSD = scrape_UCSD()
     data = raw_output()
-    BASE_DIR = "artifacts"
-    CSV_PATH = os.path.join(BASE_DIR, "rawplacement.csv")
-
-    os.makedirs(BASE_DIR, exist_ok=True)
+    
     write_data_to_csv(data, CSV_PATH)
 
