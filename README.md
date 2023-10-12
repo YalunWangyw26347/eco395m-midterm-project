@@ -1,9 +1,9 @@
-<h1 align="center" id="heading"> <span style="color:red"> <em> Hierarchy in US Faculty Hiring: Evidence from 2023-2021 Economics Ph.D. Placement </span> </h1>
+# Hierarchy in US Faculty Hiring: Evidence from 2023-2021 Economics Ph.D. Placement 
 <h3 align="center" id="heading"> 12 October 2023 <br> 
 <em> Python, Big Data, and Databases (ECO395m)  </em> <br> <h3>
 <h3 align="center" id="heading"> Yundi Xiao, Yalun Wang, Vimoli Mehta </h3>
 
-<h3> Introduction </h3>
+# Introduction 
 This project is inspired by the finding of the paper “Quantifying Hierarchy and Dynamics in US Faculty Hiring and Retention” -- "Faculty hiring networks in the United States exhibit a steep hierarchy in academia and across all domains and fields, with only 5–23% of faculty employed at universities more prestigious than their doctoral university.” We are interested in whether faculty hiring in the Economics department in the U.S. established the same pattern — limited mobility between the tier of faculties’ Ph.D. school and academic placement. The project also aims to investigate if gender plays a role in Ph.D. hiring. 
 <h3> Sources of Data </h3>
 Sources of data include placement information from 24 top Economics departments across the US.  Ranking for the Economics PhD programs was obtained from US.News(2022), and we pick top 3 tiers of universities.The final list of universities considered were:
