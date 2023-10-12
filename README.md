@@ -4,7 +4,7 @@
 <h3 align="center" id="heading"> Yundi Xiao, Yalun Wang, Vimoli Mehta </h3>
 
 <h3> Introduction </h3>
-
+This project is inspired by the finding of the paper “Quantifying Hierarchy and Dynamics in US Faculty Hiring and Retention” -- "Faculty hiring networks in the United States exhibit a steep hierarchy in academia and across all domains and fields, with only 5–23% of faculty employed at universities more prestigious than their doctoral university.” We are interested in whether faculty hiring in the Economics department in the U.S. established the same pattern — limited mobility between the tier of faculties’ Ph.D. school and academic placement. The project also aims to investigate if gender plays a role in Ph.D. hiring. 
 <h3> Sources of Data </h3>
 Source of Data
 
