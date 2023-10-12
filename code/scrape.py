@@ -626,6 +626,7 @@ def scrape_UCSD():
 
 
 def raw_output():
+    """combine all the university lists together"""
     raw_output = scrape_data_UCBerkeley + scrape_data_Yale + scrape_data_Harvard + scrape_data_Stanford\
     + scrape_data_Columbia + scrape_data_Princeton + scraped_data_New_York_University\
     + scraped_data_Northwestern_University + scraped_data_University_of_Pennsylvania\
