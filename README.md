@@ -5,7 +5,7 @@
 
 <h3>Introduction </h3>
 The "academic prestige chain" is a phenomenon that's long been observed in academia. It suggests that the prestige of the institution from which a candidate obtains their Ph.D. plays a significant role in their subsequent academic placement. Research consistently indicates that Ph.D. graduates from top-tier (often termed as "elite" or "Ivy League") institutions are more likely to secure faculty positions at similarly prestigious institutions.
-This project is also inspired by the finding of the paper “Quantifying Hierarchy and Dynamics in US Faculty Hiring and Retention” -- "Faculty hiring networks in the United States exhibit a steep hierarchy in academia and across all domains and fields, with only 5–23% of faculty employed at universities more prestigious than their doctoral university.” We are interested in the "academic prestige chain" and whether faculty hiring in the Economics department in the U.S. established the same pattern — limited mobility between the tier of faculties’ Ph.D. school and academic placement. The project also aims to investigate if gender plays a role in Ph.D. hiring. 
+The paper “Quantifying Hierarchy and Dynamics in US Faculty Hiring and Retention” suggests that "Faculty hiring networks in the United States exhibit a steep hierarchy in academia and across all domains and fields, with only 5–23% of faculty employed at universities more prestigious than their doctoral university.” We are interested in whether faculty hiring in the Economics department in the U.S. established the same pattern — limited mobility between the tier of faculties’ Ph.D. school and academic placement. The project also aims to investigate if gender plays a role in Ph.D. hiring. 
 
 <h3> Sources of Data </h3>
 
