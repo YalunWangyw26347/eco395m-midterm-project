@@ -25,7 +25,9 @@ INPUT_DIR = os.path.join("artifacts", "rawplacement_combined.csv")
 
 
 def load_and_clean_file():
-    """load the combined raw data, and clean the data by making years to form we want, only including data working as professor , and adding gender column by prediction."""
+    """load the combined raw data, and clean the data by making years 
+    to form we want, only including data working as professor, 
+    and adding gender column by prediction."""
     d = gender.Detector()
     with open(INPUT_DIR) as f:
         reader = csv.reader(f)
