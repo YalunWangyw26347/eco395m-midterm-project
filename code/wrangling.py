@@ -13,7 +13,7 @@ csv_path2 = os.path.join(BASE_DIR, "Uchi PSU.csv")
 csv1 = pd.read_csv(csv_path1)
 csv2 = pd.read_csv(csv_path2)
 
-#Combine the two dataframes
+#Combine the two dataframes(one from scrape and another one contain data that are not scrappable
 combined_csv = pd.concat([csv1, csv2])
 
 #Save the combined dataframe to a new CSV
@@ -23,7 +23,7 @@ combined_csv.to_csv(combined_csv_path, index=False)
 ### Clean the data, gender detector:
 INPUT_DIR = os.path.join("artifacts", "rawplacement1.csv")
 
-def load_file():
+def load_and_clean_file():
     d = gender.Detector()
 
     with open(INPUT_DIR) as f:
@@ -74,7 +74,7 @@ def write_data_to_csv(rawdata, path):
 
 if __name__ == "__main__":
 
-    rawdata = load_file()
+    rawdata = load_and_clean_file()
     
     write_data_to_csv(rawdata, CSV_PATH)
 
