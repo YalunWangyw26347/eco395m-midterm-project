@@ -37,10 +37,11 @@ calculate_distribution(male_df, "tier_distribution_male.csv")
 calculate_distribution(female_df, "tier_distribution_female.csv")
 
 
+OUTPUT_DIR = "analysis"
 
 #Visualization Sankey Diagram : 
-
-def create_sankey_diagram(csv_file_path, title)
+csv_file_path = "analysis"
+def create_sankey_diagram(csv_file_path, title):
     df = pd.read_csv(csv_file_path)
 
     # Create a unique list of tiers
@@ -80,14 +81,18 @@ def create_sankey_diagram(csv_file_path, title)
 
     return fig
 
-# Example usage with different titles for each diagram
-fig_1 = create_sankey_diagram('tier_distribution.csv', title="All Tier Distribution")
-fig_2 = create_sankey_diagram('tier_distribution_male.csv', title="Male Tier Distribution")
-fig_3 = create_sankey_diagram('tier_distribution_female.csv', title="Female Tier Distribution")
+def save_sankey_diagram(csv_file_path, title, output_filename):
+    fig = create_sankey_diagram(csv_file_path, title)
+    # Save the figure as an HTML file
+    fig.write_html(os.path.join(OUTPUT_DIR, output_filename))
 
-fig_1
-fig_2
-fig_3
+# Save the Sankey diagrams to HTML files
+save_sankey_diagram(os.path.join("analysis", "tier_distribution.csv"), title="All Tier Distribution", output_filename="all_tier_distribution.html")
+save_sankey_diagram(os.path.join("analysis", "tier_distribution_male.csv"), title="Male Tier Distribution", output_filename="male_tier_distribution.html")
+save_sankey_diagram(os.path.join("analysis", "tier_distribution_female.csv"), title="Female Tier Distribution", output_filename="female_tier_distribution.html")
+
+
+
 
 
 
