@@ -1,6 +1,6 @@
 import os
 import pandas as pd
-
+import plotly.graph_objects as go
 # Define file paths
 IN_PATH = os.path.join("artifacts", "cleaned_placement.csv")
 OUTPUT_DIR = "analysis"
@@ -11,8 +11,9 @@ df = pd.read_csv(IN_PATH)
 male_df = df[df['Gender'] == 'male']
 female_df = df[df['Gender'] == 'female']
 
-# Function to calculate and save tier distribution for male and female candidates
+
 def calculate_distribution(data, output_filename):
+    """calculate the proportion that people from which School Tier will work for which School Tier, and write them into a csv file"""
     result_df = pd.DataFrame(columns=['School Tier', 'Placement Tier', 'Percentage'])
 
     for school_tier in ['Tier 1', 'Tier 2', 'Tier 3']:
@@ -35,8 +36,6 @@ calculate_distribution(male_df, "tier_distribution_male.csv")
 # Tier distribution for Female candidates
 calculate_distribution(female_df, "tier_distribution_female.csv")
 
-#Let's do the visualization of the Normal Distribution
-import plotly.graph_objects as go
 
 labels = ["Tier 1", "Tier 2", "Tier 3", "Others"]
 source = [0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2]
@@ -100,7 +99,7 @@ fig.update_layout(
 
 fig.show()
 
-#Let's do the visualization of the Female Candidates
+#Let's do the visualization of the male Candidates
 labels = ["Tier 1", "Tier 2", "Tier 3", "Others"]
 source = [0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2]
 target = [0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3]
