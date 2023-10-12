@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 import matplotlib.pyplot as plt
-print(plt.style.available)
+
 plt.style.use(['seaborn-v0_8-muted'])
 # Define file paths
 IN_PATH = os.path.join("artifacts", "cleaned_placement.csv")
@@ -14,15 +14,23 @@ male_df = df[df['Gender'] == 'male']
 female_df = df[df['Gender'] == 'female']
 
 def calculate_distribution(data):
-    """Calculate the proportion that people from which School Tier will work for which School Tier."""
+    """Calculate the proportion that people from which School Tier 
+    will work for which School Tier."""
     result_df = pd.DataFrame(columns=['School Tier', 'Placement Tier', 'Percentage'])
 
     for school_tier in ['Tier 1', 'Tier 2', 'Tier 3']:    
         for placement_tier in ['Tier 1', 'Tier 2', 'Tier 3', 'Others']:
             total_candidates = len(data[data['School Tier'] == school_tier]) 
-            assistant_professors = len(data[(data['School Tier'] == school_tier) & (data['Placement Tier'] == placement_tier)])  # Comparing school and placement tier as the for loop changes 
+            # Comparing school and placement tier as the for loop changes
+            assistant_professors = len(data[(data['School Tier'] == school_tier) & (data['Placement Tier'] == placement_tier)])  
             percentage = (assistant_professors / total_candidates) * 100
-            result_df = pd.concat([result_df, pd.DataFrame({'School Tier': [school_tier], 'Placement Tier': [placement_tier], 'Percentage': [percentage]})], ignore_index=True)
+            result_df = pd.concat([result_df, pd.DataFrame(
+                {
+                    'School Tier': [school_tier], 
+                    'Placement Tier': [placement_tier], 
+                    'Percentage': [percentage]
+                    }
+                    )], ignore_index=True)
 
     return result_df
 
