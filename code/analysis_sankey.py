@@ -1,6 +1,7 @@
 import os
 import pandas as pd
 import plotly.graph_objects as go
+from IPython.display import display
 # Define file paths
 IN_PATH = os.path.join("artifacts", "cleaned_placement.csv")
 OUTPUT_DIR = "analysis"
@@ -81,17 +82,25 @@ def create_sankey_diagram(csv_file_path, title):
         font_size=10
     )
 
-    return fig
+    #return fig
+    display(fig)
 
-def save_sankey_diagram(csv_file_path, title, output_filename):
-    fig = create_sankey_diagram(csv_file_path, title)
-    # Save the figure as an HTML file
-    fig.write_html(os.path.join(OUTPUT_DIR, output_filename))
 
-# Save the Sankey diagrams to HTML files
-save_sankey_diagram(os.path.join("analysis", "tier_distribution.csv"), title="All Tier Distribution", output_filename="all_tier_distribution.html")
-save_sankey_diagram(os.path.join("analysis", "tier_distribution_male.csv"), title="Male Tier Distribution", output_filename="male_tier_distribution.html")
-save_sankey_diagram(os.path.join("analysis", "tier_distribution_female.csv"), title="Female Tier Distribution", output_filename="female_tier_distribution.html")
+create_sankey_diagram(os.path.join("analysis", "tier_distribution.csv"), title="All Tier Distribution")
+create_sankey_diagram(os.path.join("analysis", "tier_distribution_male.csv"), title="Male Tier Distribution")
+create_sankey_diagram(os.path.join("analysis", "tier_distribution_female.csv"), title="Female Tier Distribution")
+
+
+
+# def save_sankey_diagram(csv_file_path, title, output_filename):
+#     fig = create_sankey_diagram(csv_file_path, title)
+#     # Save the figure as an HTML file
+#     fig.write_html(os.path.join(OUTPUT_DIR, output_filename))
+
+# # Save the Sankey diagrams to HTML files
+# save_sankey_diagram(os.path.join("analysis", "tier_distribution.csv"), title="All Tier Distribution", output_filename="all_tier_distribution.html")
+# save_sankey_diagram(os.path.join("analysis", "tier_distribution_male.csv"), title="Male Tier Distribution", output_filename="male_tier_distribution.html")
+# save_sankey_diagram(os.path.join("analysis", "tier_distribution_female.csv"), title="Female Tier Distribution", output_filename="female_tier_distribution.html")
 
 
 
