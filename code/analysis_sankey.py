@@ -41,6 +41,8 @@ OUTPUT_DIR = "analysis"
 
 #Visualization Sankey Diagram : 
 csv_file_path = "analysis"
+
+import plotly.graph_objects as go
 def create_sankey_diagram(csv_file_path, title):
     df = pd.read_csv(csv_file_path)
 
