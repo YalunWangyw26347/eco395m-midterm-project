@@ -1,6 +1,6 @@
 import os
 import pandas as pd
-
+import plotly.graph_objects as go
 # Define file paths
 IN_PATH = os.path.join("artifacts", "cleaned_placement.csv")
 OUTPUT_DIR = "analysis"
@@ -37,7 +37,7 @@ calculate_distribution(male_df, "tier_distribution_male.csv")
 calculate_distribution(female_df, "tier_distribution_female.csv")
 
 
-import plotly.graph_objects as go
+
 
 #Let's do the visualization of the Normal Distribution
 labels = ["Tier 1", "Tier 2", "Tier 3", "Others"]
@@ -85,7 +85,7 @@ fig2 = go.Figure(go.Sankey(
 fig2.update_layout(title_text="School Tier vs. Placement Tier for Male Candidates", font_size=10)
 fig2.show()
 
-#Let's do the visualization of the Female Candidates
+#Let's do the visualization of the male Candidates
 labels = ["Tier 1", "Tier 2", "Tier 3", "Others"]
 source_indices = [1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4]
 target_indices = [1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4]
