@@ -14,7 +14,7 @@ Sources of data include placement information from 24 top Economics departments 
 
 3.Princeton University
 
-4.University of California—​Berkeley
+4.University of California, ​Berkeley
 
 5.University of Chicago
 
@@ -28,33 +28,33 @@ Sources of data include placement information from 24 top Economics departments 
 
 10.New York University
 
-11.University of California—​Los Angeles
+11.University of California, ​Los Angeles
 
 12.Cornell University
 
-13.Boston_University
+13.Boston University
 
-14.Boston_College
+14.Boston College
 
-15.University_of_Rochester
+15.University of Rochester
 
-16.University_of_Virginia
+16.University of Virginia
 
-17.Vanderbilt_University
+17.Vanderbilt University
 
-18.Washington_University_in_St_Louis
+18.Washington University in St Louis
 
 19.Duke University
 
 20.Brown University
 
-21.University of California—​Davis
+21.University of California, Davis
 
-22.University of Minnesota—​Twin Cities
+22.University of Minnesota, Twin Cities
 
-23.University of California—​San Diego
+23.University of California, ​San Diego
 
-24.Pennsylvania State University—​University Park
+24.Pennsylvania State University, ​University Park
 
 We only include part of the universities in the rank, and there can be a more comprehensive project by analyzing more universities.
 
