@@ -38,29 +38,29 @@ Tier 2:
 
 12.Cornell University
 
-13.Boston University
+13.University of Minnesota, Twin Cities
 
-14.Boston College
+14.Duke University
 
-15.University of Rochester
+15.University of California, ​San Diego
 
-16.University of Virginia
-
-17.Vanderbilt University
-
-18.Washington University in St Louis
-
-19.Duke University
-
-20.Brown University
+16.Brown University
 
 Tier 3: 
 
-21.University of California, Davis
+17.Boston University
 
-22.University of Minnesota, Twin Cities
+18.Boston College
 
-23.University of California, ​San Diego
+19.University of Rochester
+
+20.University of Virginia
+
+21.Vanderbilt University
+
+22.Washington University in St Louis
+
+23.University of California, Davis
 
 24.Pennsylvania State University, ​University Park
 
