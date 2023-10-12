@@ -79,10 +79,21 @@ Also, delivering such project with respect to other department will be also mean
 <h3> Methodology </h3> 
 In this project, we scrape our Phd placement data from economics department. We have year, school_name, student’s name, placement, these 4 variables to restore information we need in analyze. For“placement” variable, it varies a lot among universities, so we have to make a list of words we want (like professor, university, and so on), and a list of words we do not want(like postdoc, because we do not want include postdoc samples into analysis). Then filter placements that have words we want and don’t have word we do not want, and add those samples in cleaned data. In addition, using gender_guesser API to get gender information. Then, classify universities into different tiers and add columns carrying tier information in data set, and the final data is [[university name, year, student name,placement, gender, school_tier,placement_tier ]... ...]
 <h3> Results </h3> 
+This involves all the Ph.D. Economic candidates and a trend is observed to see what proportion of Tier-1 Phd Candidates can maintain the same position and work in same group universities once they graduate. We have used two methods , one pie chart  and second Sankey Diagram using the plotly library in python. The Sankey Diagram is an interactive graph which displays the proportion when we hover over the line.
 
 ![image text](./analysis/overall_tier_distribution.png)
 
+It is interesting to see that 15.1 % ( Out of 126, 19 still in Tier-1) of all candidates from Tier-1 universities are placed in Tier-1 universities as well. It is also evident that the pool of our data is less and thus the universities categorized as others has most percentage of candidates. As a candidate pursuing PhD from US wouldn’t necessarily remain in the US, the school outside US and below Tier-3 category are considered as others.
+However, 3.6% candidates from Tier-2 get placed to Tier-1 and 4% of Tier-3 candidates get placed to Tier-1 universities suggesting there is still hope 😊
+The ratio of Tier-x : Tier -x keeps on declining as we progress further. 
+
 ![image text](./analysis/female_tier_distribution.png)
 
+We also wanted to observe if there is a difference in the ratio of placement universities for men and women in the dataset. In total, we have 97 male candidates and 18% i.e 17 males still secured Tier-1 placements. However, 9.09 % secured placements in Tier-2 and Tier-3 universities. 
+
 ![image text](./analysis/male_tier_distribution.png)
+
+Similarly, we were able to identify 35 females out of which 10 ( 30%) females secured Tier-1 placements, this was astonishing to know. However, to get a better analysis we will require the candidates to be in proper proportion. Also, 7.69% of females secured placements in Tier-2 and Tier-3 each which is less in comparison to the male ratio.
+
 <h3> Conclusion </h3> 
+From the results, we can derive that there is a 23% chance that if you are in Top Tier -1 universities you would result in top-3 tier universities, and it doesn’t mean that if you are not able to secure a Tier-1 or Tier 2 university for PhD there is still a high chance you can be secured in a university greater than your current university.
