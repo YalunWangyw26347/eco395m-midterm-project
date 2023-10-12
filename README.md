@@ -11,7 +11,7 @@
 
 <h3> Limitations </h3> 
 
-
+There are a lot of limitations in the data.
 
 <h3> Methodology </h3> 
 
