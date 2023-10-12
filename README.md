@@ -79,7 +79,8 @@ Third, run “panda.py”, to define the Tier of School, and add Tier columns by
 Finally, run “analysis_graph.py”, and we will get 3 pie charts in the analysis folder.
 
 <h3> Limitations </h3> 
-In this project, we have collected 24 universities’ (including school data from Tier 1, Tier 2, and Tier 3), this is not enough, since schools in Tier 4, and Tier5 are all also of high quality, and we only collect data from 2023 and 2022. Besides, when cleaning the data, we have errors for some specific samples. For example, there is a placement: “Korea Capital Market Institute, South Korea, (Research Fellow)”, since it has “Institute”, the code will include this sample in the cleaned_data. However, the number of error samples is not so big. Moreover, we only define Tier 1, Tier 2, and Tier 3 with universities in the US, so when classifying placement into Tiers, we will treat top schools outside the US into “Other Tier”. 
+In this project, we have collected 24 universities’ (including school data from Tier 1, Tier 2, and Tier 3), this is not enough, since schools in Tier 4, and Tier5 are all also of high quality, and we only collect data from 2023 and 2022. Besides, when cleaning the data, we have errors for some specific samples. For example, there is a placement: “Korea Capital Market Institute, South Korea, (Research Fellow)”, since it has “Institute”, the code will include this sample in the cleaned_data. However, the number of error samples is not so big. Moreover, we only define Tier 1, Tier 2, and Tier 3 with universities in the US, so when classifying placement into Tiers, we will treat top schools outside the US into “Other Tier”. In addition, for the gender analysis, the pie chart did not account into the sample size of male and female. 
+
 In addition, for the gender_guessing part: 
 
 (1) we have universities that do not offer name information. For these data, we can not do the prediction.
@@ -97,6 +98,8 @@ In addition, for the gender_guessing part:
 (4) add top schools outside the US, when defining the Tiers; 
 
 (5) using specific gender_guesser API for people with different features of name, or link Chat_GPT into this project to do the gender_guessing part if it can increase the accuracy of gender prediction. Also, delivering such a project with respect to another department will be meaningful, and we can make comparisons between departments in further study.
+
+(6) add the number of samples in analyze.
 
 <h3> Methodology </h3> 
 In this project, we scrape our Ph.D. placement data from the economics department. We have 4 variables which are year, school, student’s name, and placement to restore the information we need to analyze. For“placement” variable, varies a lot among universities, so we have to make a list of words we want (like a professor, university, and so on), and a list of words we do not want(like postdoc, because we do not want to include postdoc samples into analysis). Then filter placements that have words we want and don’t have words we do not want, and add those samples in cleaned data. In addition, using gender_guesser API to get gender information. Then, classify universities into different tiers and add columns carrying tier information in the data set, and the final data is [[university name, year, student name, placement, gender, school_tier,placement_tier ]... ...]
