@@ -8,6 +8,8 @@ This project is inspired by the finding of the paper “Quantifying Hierarchy an
 <h3> Sources of Data </h3>
 Sources of data include placement information from 24 top Economics departments across the US.  Ranking for the Economics PhD programs was obtained from US.News(2022), and we pick top 3 tiers of universities.The final list of universities considered were:
 
+Tier 1:
+
 1.Harvard University
 
 2.Stanford University
@@ -28,6 +30,8 @@ Sources of data include placement information from 24 top Economics departments 
 
 10.New York University
 
+Tier 2:
+
 11.University of California, ​Los Angeles
 
 12.Cornell University
@@ -47,6 +51,8 @@ Sources of data include placement information from 24 top Economics departments 
 19.Duke University
 
 20.Brown University
+
+Tier 3: 
 
 21.University of California, Davis
 
