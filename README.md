@@ -9,7 +9,7 @@ The paper “Quantifying Hierarchy and Dynamics in US Faculty Hiring and Retenti
 
 <h3> Sources of Data </h3>
 
-We refer to the U.S News(2022) ranking and tier for Economics PhD across the US. And we scraped data from the first 3 tiers of universities.The final list of universities scraped were:
+We refer to the U.S News(2022) ranking and tier for Economics PhD across the US. And we scraped data from the first 3 tiers of universities.The final list (not ranking) of universities scraped were:
 
 Tier 1:
 
