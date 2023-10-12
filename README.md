@@ -88,17 +88,19 @@ In this project, we scrape our Phd placement data from economics department. We 
 
 ![image text](./analysis/overall_tier_distribution.png)
 
-It is interesting to see that 15.1 % ( Out of 126, 19 still in Tier-1) of all candidates from Tier-1 universities are placed in Tier-1 universities as well. It is also evident that the pool of our data is less and thus the universities categorized as others has most percentage of candidates. As a candidate pursuing PhD from US wouldn’t necessarily remain in the US, the school outside US and below Tier-3 category are considered as others.
-However, 3.6% candidates from Tier-2 get placed to Tier-1 and 4% of Tier-3 candidates get placed to Tier-1 universities suggesting there is still hope 😊
-The ratio of Tier-x : Tier -x keeps on declining as we progress further. 
+Regardless of gender, for PhDs from tier 1 universities, 15.1% of them are employed by tier 1 universities (as prestigious as their doctoral university);  6.3%  of them are employed by tier 2 universities; and 2.4% of them are employed by tier 3 universities; 76.2% of them are employed by universities other than tier 1-3 universities. 
+
+Similarly, for PhDs from tier 2 universities, 3.6% of them are employed by tier 1 universities;  5.4%  of them are employed by tier 2 universities (as prestigious as their doctoral university); and 3.6% of them are employed by tier 3 universities; 87.5% of them are employed by universities other than tier 1-3 universities.
+
+for PhDs from tier 3 universities, 4% of them are employed by tier 1 universities (as prestigious as their doctoral university);  1.6%  of them are employed by tier 2 universities; and 4% of them are employed by tier 3 universities(as prestigious as their doctoral university); 90.5% of them are employed by universities other than tier 1-3 universities.
 
 ![image text](./analysis/female_tier_distribution.png)
 
-We also wanted to observe if there is a difference in the ratio of placement universities for men and women in the dataset. In total, we have 97 male candidates and 18% i.e 17 males still secured Tier-1 placements. However, 9.09 % secured placements in Tier-2 and Tier-3 universities. 
+ 
 
 ![image text](./analysis/male_tier_distribution.png)
 
-Similarly, we were able to identify 35 females out of which 10 ( 30%) females secured Tier-1 placements, this was astonishing to know. However, to get a better analysis we will require the candidates to be in proper proportion. Also, 7.69% of females secured placements in Tier-2 and Tier-3 each which is less in comparison to the male ratio.
+
 
 <h3> Conclusion </h3> 
 From the results, we can derive that there is a 23% chance that if you are in Top Tier -1 universities you would result in top-3 tier universities, and it doesn’t mean that if you are not able to secure a Tier-1 or Tier 2 university for PhD there is still a high chance you can be secured in a university greater than your current university.
