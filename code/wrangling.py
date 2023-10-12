@@ -2,12 +2,12 @@ import os
 import csv
 import pandas as pd
 import gender_guesser.detector as gender
-BASE_DIR = "artifacts"
-    CSV_PATH = os.path.join(BASE_DIR, "cleaned_placement.csv")
-    os.makedirs(BASE_DIR, exist_ok=True)
+    
 ### Combining data: 
 # Read the CSV files
 BASE_DIR = "artifacts"
+CSV_PATH = os.path.join(BASE_DIR, "cleaned_placement.csv")
+os.makedirs(BASE_DIR, exist_ok=True)
 csv_path1 = os.path.join(BASE_DIR, "rawplacement.csv")
 csv_path2 = os.path.join(BASE_DIR, "Uchi PSU.csv")
 csv1 = pd.read_csv(csv_path1)
@@ -17,11 +17,11 @@ csv2 = pd.read_csv(csv_path2)
 combined_csv = pd.concat([csv1, csv2])
 
 #Save the combined dataframe to a new CSV
-combined_csv_path = os.path.join(BASE_DIR, "rawplacement1.csv")
+combined_csv_path = os.path.join(BASE_DIR, "rawplacement_combined.csv")
 combined_csv.to_csv(combined_csv_path, index=False)
 
 ### Clean the data, gender detector:
-INPUT_DIR = os.path.join("artifacts", "rawplacement1.csv")
+INPUT_DIR = os.path.join("artifacts", "rawplacement_combined.csv")
 
 def load_and_clean_file():
     d = gender.Detector()
