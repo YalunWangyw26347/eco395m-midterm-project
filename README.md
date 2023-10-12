@@ -7,29 +7,53 @@
 This project is inspired by the finding of the paper “Quantifying Hierarchy and Dynamics in US Faculty Hiring and Retention” -- "Faculty hiring networks in the United States exhibit a steep hierarchy in academia and across all domains and fields, with only 5–23% of faculty employed at universities more prestigious than their doctoral university.” We are interested in whether faculty hiring in the Economics department in the U.S. established the same pattern — limited mobility between the tier of faculties’ Ph.D. school and academic placement. The project also aims to investigate if gender plays a role in Ph.D. hiring. 
 <h3> Sources of Data </h3>
 Sources of data include placement information from 24 top Economics departments across the US.  Ranking for the Economics PhD programs was obtained from US.News(2022), and we pick top 3 tiers of universities.The final list of universities considered were:
+
 1.Harvard University
+
 2.Stanford University
+
 3.Princeton University
+
 4.University of California—​Berkeley
+
 5.University of Chicago
+
 6.Yale University
+
 7.Northwestern University
+
 8.Columbia University
+
 9.University of Pennsylvania
+
 10.New York University
+
 11.University of California—​Los Angeles
+
 12.Cornell University
+
 13.Boston_University
+
 14.Boston_College
+
 15.University_of_Rochester
+
 16.University_of_Virginia
+
 17.Vanderbilt_University
+
 18.Washington_University_in_St_Louis
+
 19.Duke University
+
 20.Brown University
+
 21.University of California—​Davis
+
 22.University of Minnesota—​Twin Cities
+
 23.University of California—​San Diego
+
 24.Pennsylvania State University—​University Park
 
 We only include part of the universities in the rank, and there can be a more comprehensive project by analyzing more universities.
