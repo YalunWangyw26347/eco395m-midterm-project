@@ -118,7 +118,8 @@ search_strings_2 = [
 pattern1 = "|".join(search_strings)
 pattern2 = "|".join(search_strings_1)
 pattern3 = "|".join(search_strings_2)
-# Assign "Tier 1" to rows where the "Placement" column contains any of the search strings, same for the rest of the tiers.
+# Assign "Tier 1" to rows where the "Placement" column contains
+#  any of the search strings, same for the rest of the tiers.
 df.loc[
     df["Placement"].str.contains(pattern1, case=False, na=False), "Placement Tier"
 ] = "Tier 1"
