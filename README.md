@@ -68,12 +68,15 @@ Tier 3:
 We scraped data from each university’s Ph.D. placement page, focusing on the student’s name, placement year, and placement. We cleaned the data set by dropping the observations with non-academic placement. We also add the gender variable by using Gender_Guesser. API, which generates the guessed gender from the name of each observation. 
 
 <h3> Running the code </h3>
-Our code will be executed in a Python environment and using packages specified in requirements.txt. You can install those packages we use in the project by using “pip install -r requirements.txt”. We have a sequence for running these .py files in the code folder.  You can get the result we have by doing so: 
-First, run “scrape.py” to get rawdata from those universities’ url, the rawdata will be in artifacts/rawplacement.csv
-Second, run “wrangling. py”, this file will first combine two data sets together( the one is rawdata we collect from first step, the other one is two universities’ data that are not scrappable and we collect it by hand, and it is artifacts/Uchi PSU.csv), the combined data is artifacts/rawplacement_combined.csv, and then clean the data by dropping some data we do not need. Besides, we add the gender column by prediction and finally write it into artifact/cleaned_placement.csv.
-Third, run “panda.py”, to define the Tier of School, and adding Tier columns by classifying sample’s school tier(including the school he is from and the school he works for) and we will 
-have a updated cleaned_placement.csv.
-Forth, run “analysis_graph.py”, and we will get 3 pie charts in the analysis folder.
+Our code will be executed in a Python environment and using packages specified in requirements.txt. You can install those packages we use in the project by using “pip install -r requirements.txt”. We have a sequence for running these .py files in the code folder. You can get the result we have by doing so: 
+
+First, run “scrape.py” to get data from those universities’ URLs, the data will be in artifacts/rawplacement.csv
+
+Second, run “wrangling. py”, this file will first combine two data sets together( the one is data we collect from the first step, the other one is two universities’ data that are not scrappable and we collect it by hand, and it is artifacts/Uchi PSU.csv), the combined data is artifacts/rawplacement_combined.csv, and then clean the data by dropping some data we do not need. Besides, we add the gender column by prediction and finally write it into artifact/cleaned_placement.csv.
+
+Third, run “panda.py”, to define the Tier of School, and add Tier columns by classifying the sample’s school tier(including the school this individual is from and the school this individual is hired) and we will have an updated cleaned_placement.csv.
+
+Finally, run “analysis_graph.py”, and we will get 3 pie charts in the analysis folder.
 
 <h3> Limitations </h3> 
 <ol>
